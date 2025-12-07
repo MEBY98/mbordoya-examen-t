@@ -1,0 +1,90 @@
+spring:
+  application:
+    name: mbordoya-back-web-main
+
+    feature-flags:
+      example-consumer-enabled: true
+  cache:
+    type: CAFFEINE
+    caffeine:
+      spec: "initialCapacity=4, expireAfterAccess=24h"
+
+  kafka:
+    properties:
+      schema:
+        registry:
+          url: http://localhost:9081
+      security:
+        protocol: "PLAINTEXT"
+    consumer:
+      bootstrap-servers: localhost:29092 #
+      properties:
+        key.deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer #
+        value.deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer #
+      auto-offset-reset: earliest
+    producer:
+      bootstrap-servers: localhost:29092
+      properties:
+#        key.serializer: org.apache.kafka.common.serialization.StringSerializer
+#        value.serializer: org.apache.kafka.common.serialization.StringSerializer
+
+        key.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+        value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+        auto.register.schemas: true
+      auto-offset-reset: earliest
+
+# Actuator endpoints configuration
+management:
+  endpoint:
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: [ info, health, metrics, prometheus ]
+
+fwkcna:
+  kafka:
+    producer:
+      topics:
+        example: mbordoya.test.topic.examples
+    consumer:
+      topics:
+        example: mbordoya.test.topic.examples
+        example-group-id: mbordoya_test_topic_examples_${spring.application.name}_v1
+      error-type: CUSTOM
+
+  buckets:
+    - id: minio_local_bucket_a
+      bucket-name: localbucketa
+      enabled: true
+      provider: minio
+      url: http://localhost:9000
+      trust-all-certs: true
+      relax-hostname: true
+      virtual-host-buckets: false
+      signed-operation-token-expiration: 120
+      credentials:
+        access-key: minio123
+        secret-key: minio123password
+    - id: minio_local_bucket_b
+      bucket-name: localbucketb
+      enabled: true
+      provider: minio
+      url: http://localhost:9000
+      trust-all-certs: true
+      relax-hostname: true
+      virtual-host-buckets: false
+      signed-operation-token-expiration: 120
+      credentials:
+        access-key: minio123
+        secret-key: minio123password
+
+server:
+  port: 8080

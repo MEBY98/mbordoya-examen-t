@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>mbordoya-back-web-main-boot</artifactId>
+  <packaging>jar</packaging>
+  <name>mbordoya-back-web-main-boot</name>
+
+  <parent>
+    <groupId>com.mercadona.mbordoya.web-main</groupId>
+    <artifactId>mbordoya-back-web-main</artifactId>
+    <version>0.0.1</version>
+  </parent>
+
+  <properties>
+    <jackson.version>2.17.3</jackson.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.mercadona.mbordoya.web-main</groupId>
+      <artifactId>mbordoya-back-web-main-api-rest</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.mercadona.mbordoya.web-main</groupId>
+      <artifactId>mbordoya-back-web-main-postgres-repository</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.mercadona.mbordoya.web-main</groupId>
+      <artifactId>mbordoya-back-web-main-bucket-repository</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.mercadona.mbordoya.web-main</groupId>
+      <artifactId>mbordoya-back-web-main-kafka-producer</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.mercadona.mbordoya.web-main</groupId>
+      <artifactId>mbordoya-back-web-main-kafka-consumer</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.mercadona.framework.cna</groupId>
+      <artifactId>fwkcna-starter-observability-poe</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-cache</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.github.ben-manes.caffeine</groupId>
+      <artifactId>caffeine</artifactId>
+    </dependency>
+
+<!--    <dependency>-->
+<!--      <groupId>org.springdoc</groupId>-->
+<!--      <artifactId>springdoc-openapi-starter-webmvc-api</artifactId>-->
+<!--      <version>2.8.14</version>-->
+<!--    </dependency>-->
+
+  </dependencies>
+
+  <build>
+    <plugins>
+      <!-- Provides support to package and run applications "in-place" -->
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+      </plugin>
+
+       <!-- Assembly Build info on final artefact-->
+      <plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+			</plugin>
+    </plugins>
+  </build>
+
+
+
+</project>

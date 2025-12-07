@@ -1,0 +1,67 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.mercadona.mbordoya.web-main</groupId>
+  <artifactId>mbordoya-back-web-main</artifactId>
+  <version>0.0.1</version>
+  <packaging>pom</packaging>
+  <name>mbordoya-back-web-main</name>
+
+  <!-- Provides dependency and plugin management for the given Spring Boot version -->
+  <parent>
+    <groupId>com.mercadona.framework.cna</groupId>
+    <artifactId>fwkcna-parent</artifactId>
+    <version>5.1.0</version>
+  </parent>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.mercadona.mbordoya.web-main</groupId>
+        <artifactId>mbordoya-back-web-main-api-rest</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.mercadona.mbordoya.web-main</groupId>
+        <artifactId>mbordoya-back-web-main-application</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.mercadona.mbordoya.web-main</groupId>
+        <artifactId>mbordoya-back-web-main-postgres-repository</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.mercadona.mbordoya.web-main</groupId>
+        <artifactId>mbordoya-back-web-main-bucket-repository</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.mercadona.mbordoya.web-main</groupId>
+        <artifactId>mbordoya-back-web-main-kafka-producer</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.mercadona.mbordoya.web-main</groupId>
+        <artifactId>mbordoya-back-web-main-kafka-consumer</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <modules>
+    <!-- Core application-->
+    <module>application</module>
+    <!-- Adapter implementations-->
+    <module>driving/api-rest</module>
+    <module>driven/postgres-repository</module>
+    <module>driven/bucket-repository</module>
+    <module>driven/kafka-producer</module>
+    <module>driving/kafka-consumer</module>
+    <!-- Runtime -->
+    <module>boot</module>
+  </modules>
+
+</project>

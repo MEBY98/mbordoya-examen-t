@@ -1,0 +1,126 @@
+openapi: 3.0.1
+info:
+  title: Mbordoya Examen T
+  description: Examen T contrato de API
+  contact:
+    name: mbordoya
+  version: 1.0.0
+servers:
+  - url: 'http://localhost:8080'
+tags:
+  - name: ExampleTag
+    description: Example tag description.
+paths:
+  /examples:
+    post:
+      tags:
+        - ExampleTag
+      description: Create new Order Group.
+      summary: Create new Order Group.
+      operationId: createOrderGroup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/exampleDto'
+      responses:
+        "200":
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exampleDto'
+components:
+  schemas:
+    exampleDto:
+      type: object
+      properties:
+        long:
+          type: integer
+          format: int64
+        integer:
+          type: integer
+          format: int32
+        localDate:
+          type: string
+          format: date
+        offsetDateTime:
+          type: string
+          format: date-time
+  headers:
+    Retry-After:
+      description: '- Quantity of seconds the next request to be accepted.'
+      schema:
+        type: integer
+        format: int32
+    X-Rate-Limit:
+      schema:
+        type: string
+      description: |-
+        - Informs the state of the requests window to be accepted. It's format will be ```[{"window":0,"type":"throttle","remaining":9}]```, meaning:
+          - \"window: 0\": Seconds until next window for requests to be accepted again, if no more requests are being accepted.
+          - \"type: throttle\": When limit is reached, requests will be cut off.
+          - \"remaining: 9\": Remaining requests to be accepted until next window.
+  responses:
+    BadRequest:
+      description: Bad request.
+      headers:
+        X-Rate-Limit:
+          $ref: '#/components/headers/XRateLimit'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorModelV1'
+    UnauthorizedRequest:
+      description: Unauthorized request
+      headers:
+        X-Rate-Limit:
+          $ref: '#/components/headers/XRateLimit'
+    Forbidden:
+      description: Forbidden request
+      headers:
+        X-Rate-Limit:
+          $ref: '#/components/headers/XRateLimit'
+    NotFound:
+      description: Not found
+      headers:
+        X-Rate-Limit:
+          $ref: '#/components/headers/XRateLimit'
+    Timeout:
+      description: Request timeout
+      headers:
+        X-Rate-Limit:
+          $ref: '#/components/headers/XRateLimit'
+    PayloadTooLarge:
+      description: Payload too large
+      headers:
+        X-Rate-Limit:
+          $ref: '#/components/headers/XRateLimit'
+    UnsupportedMediaFormat:
+      description: Unsoported media format
+      headers:
+        X-Rate-Limit:
+          $ref: '#/components/headers/XRateLimit'
+    TooManyRequests:
+      description: Too many requests
+      headers:
+        X-Rate-Limit:
+          $ref: '#/components/headers/XRateLimit'
+        Retry-After:
+          description: "- Quantity of seconds the next request to be accepted."
+          schema:
+            type: integer
+            format: int32
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorModelV1'
+    GatewayTimeout:
+      description: Gateway timeout
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorModelV1'
+x-original-swagger-version: '2.0'

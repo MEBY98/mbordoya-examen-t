@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>mbordoya-back-web-main-bucket-repository</artifactId>
+  <packaging>jar</packaging>
+  <name>mbordoya-back-web-main-bucket-repository</name>
+
+  <parent>
+    <groupId>com.mercadona.mbordoya.web-main</groupId>
+    <artifactId>mbordoya-back-web-main</artifactId>
+    <version>0.0.1</version>
+    <relativePath>../../pom.xml</relativePath>
+  </parent>
+
+  <dependencies>
+
+    <dependency>
+      <groupId>com.mercadona.mbordoya.web-main</groupId>
+      <artifactId>mbordoya-back-web-main-application</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.mercadona.framework.cna</groupId>
+      <artifactId>fwkcna-starter-buckets</artifactId>
+    </dependency>
+  </dependencies>
+
+</project>

@@ -1,0 +1,10 @@
+{
+  "namespace": "com.mercadona.mbordoya.web.main.kafka.producer.kafka_models",
+  "type": "record",
+  "name": "ExampleKafkaValue",
+  "fields": [
+    {"name": "id", "type": "long"},
+    {"name": "name", "type": "string"},
+    {"name": "typeId", "type": "long"}
+  ]
+}

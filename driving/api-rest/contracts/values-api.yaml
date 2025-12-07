@@ -1,0 +1,14 @@
+metadata:
+  labels:
+    app: mbordoya-back-web-main
+    description: Examen T mbordoya
+    title: Examen T mbordoya
+spec:
+  deploy:
+    apiFileName: mbordoya-examen-t-contract.yaml
+    type:
+      fwkSpringBoot:
+        groupId: com.mercadona.apps.mbordoya
+        artifactId: mbordoya-microservice
+        package: com.mercadona.api.mbordoya.microservice
+        interfacesWithTags: true
