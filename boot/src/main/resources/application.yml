@@ -2,6 +2,9 @@ spring:
   application:
     name: mbordoya-back-web-main
 
+    security:
+      pepper: ${SECURITY_PEPPER}
+
     feature-flags:
       example-consumer-enabled: ${FF_EXAMPLE_CONSUMER_ENABLED}
   cache:

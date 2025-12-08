@@ -1,3 +1,6 @@
+#SECURITY
+SECURITY_PEPPER: local-development-pepper
+
 #FEATURE_FLAGS
 FF_EXAMPLE_CONSUMER_ENABLED: true
 

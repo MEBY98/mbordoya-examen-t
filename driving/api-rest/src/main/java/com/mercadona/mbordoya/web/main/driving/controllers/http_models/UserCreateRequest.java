@@ -7,7 +7,8 @@ import lombok.*;
 @Builder
 @Getter
 @Setter
-public class ExampleIdRequest {
-  private Long id_1;
-  private Long id_2;
+public class UserCreateRequest {
+
+  private String username;
+  private String password;
 }

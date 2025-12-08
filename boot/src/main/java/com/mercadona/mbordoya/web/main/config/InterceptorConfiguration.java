@@ -21,7 +21,7 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
     registry.addInterceptor(localeInterceptor).order(Integer.MAX_VALUE);
     registry.addInterceptor(jwtInterceptor)
         .addPathPatterns("/examples")
-        .excludePathPatterns("/auth/**")
+        .excludePathPatterns("/auth/**", "/user/**")
         .order(0);
   }
 

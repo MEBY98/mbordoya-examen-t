@@ -4,7 +4,6 @@ import com.mercadona.mbordoya.web.main.domain.ExampleChildDomain;
 import com.mercadona.mbordoya.web.main.domain.ExampleDomain;
 import com.mercadona.mbordoya.web.main.driving.controllers.http_models.ExampleChildCreateRequest;
 import com.mercadona.mbordoya.web.main.driving.controllers.http_models.ExampleCreateRequest;
-import com.mercadona.mbordoya.web.main.driving.controllers.http_models.ExampleIdRequest;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

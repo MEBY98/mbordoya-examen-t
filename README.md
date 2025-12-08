@@ -9,8 +9,15 @@ docker-compose up -d
 ```
 
 Si al arrancar docker fallan los servicios de kafka puede ser provocado porque dependen unos de otros y los contenedores
-están UP antes de que los propios servicios de las imagenes esten listos. En ese caso, parar todo el docker-compose y levantar
+están UP antes de que los propios servicios de las imágenes estén listos. En ese caso, parar todo el docker-compose y levantar
 cada contenedor en orden, esperando unos segundos entre cada uno para que el servicio este listo.
+
+Para ejecutar únicamente el contenedor de la aplicación usando docker-compose:
+
+```bash
+cd devops/docker/
+docker-compose up -d --build t-app
+```
 
 # MINIO
 
@@ -156,6 +163,25 @@ ya que en un entorno real se deberia utilizar flyway para la gestion de migracio
 
 Se ha desarrollado una seguridad de peticiones básica para el ejemplo, utilizando un filtro que comprueba la existencia de un header
 "Authorization" con un token de tipo "Bearer" generado y firmado por la propia aplicación. El token se genera en el endpoint ```auth/token```.
+
+Los usuarios validos de la aplicacion son guardados en BBDD. Para crear un nuevo usuario se hace a través del endpoint:
+```POST /user```
+Con el siguiente body:
+```json5
+{
+  "username": "user1",
+  "password": "password1"
+}
+```
+o con curl desde el terminal:
+```bash
+curl --location 'http://localhost:8080/user' \
+--header 'Content-Type: application/json' \
+--data '{
+"username": "mbordoya",
+"password": "123456789"
+}'
+```
 
 # CONTRATO SWAGGER AUTOGENERADO
 
