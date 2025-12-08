@@ -65,69 +65,69 @@ docker-compose.yml
 
 Estoy configurando el serializador como String ya que AVRO requiere de clases especificas mas complejas
 y archivos especificos que definen los atributos y validaciones del AVRO:
-   ```
-    key.serializer: org.apache.kafka.common.serialization.StringSerializer
-    value.serializer: org.apache.kafka.common.serialization.StringSerializer
-   ```
+```
+ key.serializer: org.apache.kafka.common.serialization.StringSerializer
+ value.serializer: org.apache.kafka.common.serialization.StringSerializer
+```
 Esto implica tener configurado el KafkaTemplate con los tipos <String, String>
 
 Para utilizar el KafkaAvroSerializer recomendado por el FWK de Mercadona, es necesario esta configuracion:
 
 1. application.yaml:
-    ```
-       key.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
-       value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
-       auto.register.schemas: true # sin esto es necesario primero crear los avro en el schema-registry de akhq
-    ```
+ ```
+    key.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+    value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+    auto.register.schemas: true # sin esto es necesario primero crear los avro en el schema-registry de akhq
+ ```
 2. kafka-producer / pom.xml, añadir plugin para generar clases AVRO a partir de los archivos .avsc
-   ```
-   <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.avro</groupId>
-        <artifactId>avro-maven-plugin</artifactId>
-        <version>1.11.2</version>
-        <executions>
-          <execution>
-            <phase>generate-sources</phase>
-            <goals>
-              <goal>schema</goal>
-            </goals>
-            <configuration>
-              <sourceDirectory>${project.basedir}/src/main/resources/avro</sourceDirectory>
-              <outputDirectory>${project.basedir}/src/main/java</outputDirectory>
-              <stringType>String</stringType>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-   </build>
-   ```
+```
+<build>
+ <plugins>
+   <plugin>
+     <groupId>org.apache.avro</groupId>
+     <artifactId>avro-maven-plugin</artifactId>
+     <version>1.11.2</version>
+     <executions>
+       <execution>
+         <phase>generate-sources</phase>
+         <goals>
+           <goal>schema</goal>
+         </goals>
+         <configuration>
+           <sourceDirectory>${project.basedir}/src/main/resources/avro</sourceDirectory>
+           <outputDirectory>${project.basedir}/src/main/java</outputDirectory>
+           <stringType>String</stringType>
+         </configuration>
+       </execution>
+     </executions>
+   </plugin>
+ </plugins>
+</build>
+```
 3. resources/avro -> crear archivos para generar las clases de AVRO que mapean contra el mensaje de 
 Kafka (esto en realidad lo da el equipo de kafka de Mercadona)
-   ```
-   resources/avro/exampleKeyAvro.avsc
-   {
-      "namespace": "com.mercadona.mbordoya.web.main.kafka.producer.kafka_models",
-      "type": "record",
-      "name": "ExampleKafkaKey",
-      "fields": [
-         {"name": "id", "type": "long"}
-      ]
-   }
-   resources/avro/exampleValueAvro.avsc
-   {
-      "namespace": "com.mercadona.mbordoya.web.main.kafka.producer.kafka_models",
-      "type": "record",
-      "name": "ExampleKafkaValue",
-      "fields": [
-         {"name": "id", "type": "long"},
-         {"name": "name", "type": "string"},
-         {"name": "typeId", "type": "long"}
-      ]
-   }
-   ```
+```
+resources/avro/exampleKeyAvro.avsc
+{
+   "namespace": "com.mercadona.mbordoya.web.main.kafka.producer.kafka_models",
+   "type": "record",
+   "name": "ExampleKafkaKey",
+   "fields": [
+      {"name": "id", "type": "long"}
+   ]
+}
+resources/avro/exampleValueAvro.avsc
+{
+   "namespace": "com.mercadona.mbordoya.web.main.kafka.producer.kafka_models",
+   "type": "record",
+   "name": "ExampleKafkaValue",
+   "fields": [
+      {"name": "id", "type": "long"},
+      {"name": "name", "type": "string"},
+      {"name": "typeId", "type": "long"}
+   ]
+}
+```
    
 # KAFKA-CONSUMER
 
