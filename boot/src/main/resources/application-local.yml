@@ -1,3 +1,24 @@
+#FEATURE_FLAGS
+FF_EXAMPLE_CONSUMER_ENABLED: true
+
+#KAFKA
+BOOTSTRAP_SERVERS: localhost:29092
+SCHEMA_REGISTRY_URL: http://localhost:9081
+
+#MINIO
+MINIO_SERVER_URL: http://localhost:9000
+MINIO_ACCESS_KEY: minio123
+MINIO_SECRET_KEY: minio123password
+
+#POSTGRES
+DATABASE_URL: jdbc:postgresql://localhost:5432/examples
+DATABASE_USERNAME: sa
+DATABASE_PASSWORD: root
+
+#FLYWAY
+FLYWAY_DATABASE_USERNAME: sa
+FLYWAY_DATABASE_PASSWORD: root
+
 spring:
   flyway:
     enabled: false
@@ -16,8 +37,7 @@ spring:
     init:
       mode: always
 
-  datasource:
-    url: jdbc:postgresql://localhost:5432/examples
-    username: sa
-    password: root
-    driver-class-name: org.postgresql.Driver
+fwkcna:
+  jpa:
+    data-migration:
+      disabled: true
