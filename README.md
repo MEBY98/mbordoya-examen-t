@@ -4,6 +4,7 @@ Framework Backend Arquetipo Web
 # ARRANQUE DE APLICACIÓN
 
 ```bash
+mvn clean install
 cd devops/docker/
 docker-compose up -d
 ```
@@ -15,6 +16,7 @@ cada contenedor en orden, esperando unos segundos entre cada uno para que el ser
 Para ejecutar únicamente el contenedor de la aplicación usando docker-compose:
 
 ```bash
+mvn clean install
 cd devops/docker/
 docker-compose up -d --build t-app
 ```
@@ -198,3 +200,32 @@ con ello intentamos lograr un enfoque de "contract-first" en el desarrollo de la
 ```
 Además, se han creado interfaces *Api.java* en el módulo api-rest, intentando seguir de la forma más acertada el patrón
 de "api-first".
+
+# i18n
+
+Para la internacionalización de mensajes se han creado los archivos messages.properties (español) 
+y messages_pt.properties (portugués)
+
+Para probar la internacionalización, se puede añadir el header "Accept-Language" en las peticiones, con los valores "es" o "pt".
+Si no se añade el header, el idioma por defecto es español. Se ha insertado un interceptor encargado de capturar el 
+header y settear en el locale correspondiente.
+
+Para los mensajes excepciones basta con definir los códigos setteados en los contructores de las excepciones. Ejemplo:
+```java
+public class ExampleNotFoundException extends ApplicationException {
+
+  public ExampleNotFoundException(final Long id) {
+    super(400, "EXAMPLE_NOT_FOUND_ERROR_CODE", "EXAMPLE_NOT_FOUND_ERROR_CODE_DETAIL", id);
+  }
+}
+```
+```properties
+#messages.properties messages_es.properties 
+EXAMPLE_NOT_FOUND_ERROR_CODE=Ejemplo no encontrado
+EXAMPLE_NOT_FOUND_ERROR_CODE_DETAIL=No se ha encontrado el ejemplo con id {0}
+```
+```properties
+# messages_pr.properties
+EXAMPLE_NOT_FOUND_ERROR_CODE=Exemplo não encontrado
+EXAMPLE_NOT_FOUND_ERROR_CODE_DETAIL=Não foi encontrado o exemplo com id {0}
+```
