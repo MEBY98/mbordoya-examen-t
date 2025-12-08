@@ -1,0 +1,22 @@
+spring:
+  flyway:
+    enabled: false
+    locations: classpath:migration/versions
+
+  jpa:
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+  sql:
+    init:
+      mode: always
+
+fwkcna:
+  jpa:
+    data-migration:
+      disabled: true

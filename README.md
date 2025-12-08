@@ -1,16 +1,16 @@
 Framework Backend Arquetipo Web
 ===================================
 
+# ARRANQUE DE APLICACIÓN
+
 ```bash
-mvn archetype:generate -DarchetypeGroupId=com.mercadona.framework.cna.archetype -DarchetypeArtifactId=fwkcna-archetype-web -DarchetypeVersion=5.0.0
+cd devops/docker/
+docker-compose up -d
 ```
 
-# Microservicio generado a partir de arquetipo
-
-Toda la documentación relevante al desarrollo de este tipo de proyectos se encuentra en la guía del
-desarrollador: [Guía del desarrollador](https://fwk.srv.mercadona.com/framework/spring-boot?pathname=/latest/getting-started/first-api-rest/)
-
-Versión del arquetipo: `5.1.0`
+Si al arrancar docker fallan los servicios de kafka puede ser provocado porque dependen unos de otros y los contenedores
+están UP antes de que los propios servicios de las imagenes esten listos. En ese caso, parar todo el docker-compose y levantar
+cada contenedor en orden, esperando unos segundos entre cada uno para que el servicio este listo.
 
 # MINIO
 
@@ -19,35 +19,35 @@ Acceso a consola web: http://localhost:9000
 Usuario: minio123
 Password: minio123password
 
-Configuracion del bucket en application.yml:
+Configuración del bucket en application.yml:
 
-```
+```yaml
 fwkcna:
-    buckets:
+  buckets:
     - id: minio_local_bucket_a
       bucket-name: localbucketa
       enabled: true
       provider: minio
-      url: http://localhost:9000
+      url: ${MINIO_SERVER_URL}
       trust-all-certs: true
       relax-hostname: true
       virtual-host-buckets: false
       signed-operation-token-expiration: 120
       credentials:
-        access-key: minio123
-        secret-key: minio123password
+        access-key: ${MINIO_ACCESS_KEY}
+        secret-key: ${MINIO_SECRET_KEY}
     - id: minio_local_bucket_b
       bucket-name: localbucketb
       enabled: true
       provider: minio
-      url: http://localhost:9000
+      url: ${MINIO_SERVER_URL}
       trust-all-certs: true
       relax-hostname: true
       virtual-host-buckets: false
       signed-operation-token-expiration: 120
       credentials:
-        access-key: minio123
-        secret-key: minio123password
+        access-key: ${MINIO_ACCESS_KEY}
+        secret-key: ${MINIO_SECRET_KEY}
 ```
 
 # KAFKA
@@ -65,22 +65,22 @@ docker-compose.yml
 
 Estoy configurando el serializador como String ya que AVRO requiere de clases especificas mas complejas
 y archivos especificos que definen los atributos y validaciones del AVRO:
-```
- key.serializer: org.apache.kafka.common.serialization.StringSerializer
- value.serializer: org.apache.kafka.common.serialization.StringSerializer
+```yaml
+key.serializer: org.apache.kafka.common.serialization.StringSerializer
+value.serializer: org.apache.kafka.common.serialization.StringSerializer
 ```
 Esto implica tener configurado el KafkaTemplate con los tipos <String, String>
 
 Para utilizar el KafkaAvroSerializer recomendado por el FWK de Mercadona, es necesario esta configuracion:
 
 1. application.yaml:
- ```
-    key.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
-    value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
-    auto.register.schemas: true # sin esto es necesario primero crear los avro en el schema-registry de akhq
- ```
-2. kafka-producer / pom.xml, añadir plugin para generar clases AVRO a partir de los archivos .avsc
+```yaml
+key.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+auto.register.schemas: true # sin esto es necesario primero crear los avro en el schema-registry de akhq
 ```
+2. kafka-producer / pom.xml, añadir plugin para generar clases AVRO a partir de los archivos .avsc
+```xml
 <build>
  <plugins>
    <plugin>
@@ -106,8 +106,8 @@ Para utilizar el KafkaAvroSerializer recomendado por el FWK de Mercadona, es nec
 ```
 3. resources/avro -> crear archivos para generar las clases de AVRO que mapean contra el mensaje de 
 Kafka (esto en realidad lo da el equipo de kafka de Mercadona)
-```
-resources/avro/exampleKeyAvro.avsc
+```json5
+//resources/avro/exampleKeyAvro.avsc
 {
    "namespace": "com.mercadona.mbordoya.web.main.kafka.producer.kafka_models",
    "type": "record",
@@ -116,7 +116,9 @@ resources/avro/exampleKeyAvro.avsc
       {"name": "id", "type": "long"}
    ]
 }
-resources/avro/exampleValueAvro.avsc
+```
+```json5
+//resources/avro/exampleValueAvro.avsc
 {
    "namespace": "com.mercadona.mbordoya.web.main.kafka.producer.kafka_models",
    "type": "record",
@@ -161,7 +163,7 @@ Para ver el contrato swagger autogenerado por el FWK, una vez arrancada la aplic
 ``` http://localhost:8080/v3/api-docs #version json ``` o ```http://localhost:8080/v3/api-docs.yaml #version yaml``` 
 el cual se genera con las anotaciones que brinda el starter de springdoc-openapi en el FWK, con la siguiente dependencia,
 con ello intentamos lograr un enfoque de "contract-first" en el desarrollo de las APIs REST:
-```
+```xml
 <dependency>
       <groupId>org.springdoc</groupId>
       <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
