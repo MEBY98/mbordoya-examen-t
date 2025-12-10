@@ -1,14 +1,19 @@
 package com.mercadona.mbordoya.web.main.application.use_cases;
 
 import com.mercadona.mbordoya.web.main.application.ports.driving.StoreUseCasePort;
+import com.mercadona.mbordoya.web.main.application.services.store.ProductCsvWriter;
 import com.mercadona.mbordoya.web.main.application.services.store.StoreFiller;
 import com.mercadona.mbordoya.web.main.application.services.store.StoreService;
-import com.mercadona.mbordoya.web.main.domain.Store;
-import com.mercadona.mbordoya.web.main.domain.StoreQuery;
+import com.mercadona.mbordoya.web.main.domain.store.ProductCsvRecord;
+import com.mercadona.mbordoya.web.main.domain.store.Store;
+import com.mercadona.mbordoya.web.main.domain.store.StoreQuery;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+
+import java.util.LinkedList;
+import java.util.List;
 
 @Service
 @Slf4j
@@ -17,6 +22,7 @@ public class StoreUseCase implements StoreUseCasePort {
 
   private final StoreService storeService;
   private final StoreFiller storeFiller;
+  private final ProductCsvWriter productCsvWriter;
 
   @Override
   public Long createStore(final Store storeDomain) {
@@ -68,5 +74,21 @@ public class StoreUseCase implements StoreUseCasePort {
     store.setModules(modules);
     store.setStoreStorages(storeStorages);
     return store;
+  }
+
+  @Override
+  public String getProductsCsv() {
+    final var modules = this.storeService.getAllModulesWithStock();
+    final var storeStorages = this.storeService.getAllStoreStoragesWithStock();
+    final List<ProductCsvRecord> productRecords = new LinkedList<>();
+
+    modules.forEach(moduleDomain -> moduleDomain.getModuleStocks()
+            .forEach(moduleStock -> productRecords.add(new ProductCsvRecord(moduleDomain, moduleStock))));
+    storeStorages.forEach(storeStorage -> storeStorage.getStoreStorageStocks()
+        .forEach(storeStorageStock -> productRecords.add(new ProductCsvRecord(storeStorage, storeStorageStock))));
+
+    final var bytes = this.productCsvWriter.parseToBytesWithHeaders(productRecords);
+
+    return this.storeService.uploadProductCsv(bytes);
   }
 }

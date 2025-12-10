@@ -1,9 +1,9 @@
 package com.mercadona.mbordoya.web.main.kafka.producer.adapters;
 
 import com.mercadona.framework.cna.lib.kafka.producer.MercadonaKafkaTemplate;
-import com.mercadona.mbordoya.web.main.kafka.producer.kafka_models.ExampleKafkaKey;
 import com.mercadona.mbordoya.web.main.application.ports.driven.ExampleProducerPort;
-import com.mercadona.mbordoya.web.main.domain.ExampleDomain;
+import com.mercadona.mbordoya.web.main.domain.example.ExampleDomain;
+import com.mercadona.mbordoya.web.main.kafka.producer.kafka_models.ExampleKafkaKey;
 import com.mercadona.mbordoya.web.main.kafka.producer.kafka_models.ExampleKafkaValue;
 import com.mercadona.mbordoya.web.main.kafka.producer.mappers.ExampleKafkaMapper;
 import org.springframework.beans.factory.annotation.Value;

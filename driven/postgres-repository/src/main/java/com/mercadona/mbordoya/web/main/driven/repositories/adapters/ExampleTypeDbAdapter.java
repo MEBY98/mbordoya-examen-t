@@ -1,7 +1,7 @@
 package com.mercadona.mbordoya.web.main.driven.repositories.adapters;
 
 import com.mercadona.mbordoya.web.main.application.ports.driven.ExampleTypeDbPort;
-import com.mercadona.mbordoya.web.main.domain.ExampleTypeDomain;
+import com.mercadona.mbordoya.web.main.domain.example.ExampleTypeDomain;
 import com.mercadona.mbordoya.web.main.driven.repositories.jpa_repositories.ExampleTypeJpaRepository;
 import com.mercadona.mbordoya.web.main.driven.repositories.mappers.ExampleTypeDbMapper;
 import lombok.RequiredArgsConstructor;

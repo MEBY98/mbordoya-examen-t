@@ -1,6 +1,6 @@
 package com.mercadona.mbordoya.web.main.driven.repositories.mappers;
 
-import com.mercadona.mbordoya.web.main.domain.*;
+import com.mercadona.mbordoya.web.main.domain.store.*;
 import com.mercadona.mbordoya.web.main.driven.repositories.models.stores.*;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

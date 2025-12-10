@@ -1,7 +1,7 @@
-package com.mercadona.mbordoya.web.main.application.services;
+package com.mercadona.mbordoya.web.main.application.services.example;
 
 import com.mercadona.mbordoya.web.main.application.ports.driven.ExampleTypeDbPort;
-import com.mercadona.mbordoya.web.main.domain.ExampleTypeDomain;
+import com.mercadona.mbordoya.web.main.domain.example.ExampleTypeDomain;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;

@@ -2,8 +2,8 @@ package com.mercadona.mbordoya.web.main.driving.controllers.adapters;
 
 import com.mercadona.framework.cna.commons.rest.api.model.Pagination;
 import com.mercadona.mbordoya.web.main.application.ports.driving.StoreUseCasePort;
-import com.mercadona.mbordoya.web.main.domain.Store;
-import com.mercadona.mbordoya.web.main.domain.StoreQuery;
+import com.mercadona.mbordoya.web.main.domain.store.Store;
+import com.mercadona.mbordoya.web.main.domain.store.StoreQuery;
 import com.mercadona.mbordoya.web.main.driving.controllers.api.StoreApi;
 import com.mercadona.mbordoya.web.main.driving.controllers.http_models.store.*;
 import com.mercadona.mbordoya.web.main.driving.controllers.http_models.store.summary.StoreSummaryResponse;
@@ -59,6 +59,11 @@ public class StoreController implements StoreApi {
   @Override
   public ResponseEntity<Long> deleteStore(final Long id) {
     return ResponseEntity.ok(this.storeUseCasePort.deleteStore(id));
+  }
+
+  @Override
+  public ResponseEntity<String> getProductsCsv() {
+    return ResponseEntity.ok(this.storeUseCasePort.getProductsCsv());
   }
 
   @Override

@@ -1,7 +1,7 @@
 package com.mercadona.mbordoya.web.main.driven.repositories.mappers;
 
-import com.mercadona.mbordoya.web.main.domain.Specialization;
-import com.mercadona.mbordoya.web.main.domain.SpecializationName;
+import com.mercadona.mbordoya.web.main.domain.store.Specialization;
+import com.mercadona.mbordoya.web.main.domain.store.SpecializationName;
 import com.mercadona.mbordoya.web.main.driven.repositories.models.stores.SpecializationMO;
 import com.mercadona.mbordoya.web.main.driven.repositories.models.stores.SpecializationNameMO;
 import org.mapstruct.Mapper;

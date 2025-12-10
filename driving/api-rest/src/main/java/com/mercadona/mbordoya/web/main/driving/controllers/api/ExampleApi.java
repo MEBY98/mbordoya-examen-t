@@ -1,6 +1,6 @@
 package com.mercadona.mbordoya.web.main.driving.controllers.api;
 
-import com.mercadona.mbordoya.web.main.domain.ExampleDomain;
+import com.mercadona.mbordoya.web.main.domain.example.ExampleDomain;
 import com.mercadona.mbordoya.web.main.driving.controllers.http_models.ExampleCreateRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;

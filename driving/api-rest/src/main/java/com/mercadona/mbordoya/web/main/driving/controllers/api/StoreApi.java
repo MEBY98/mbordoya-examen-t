@@ -36,6 +36,10 @@ public interface StoreApi {
   @DeleteMapping("/{id}")
   ResponseEntity<Long> deleteStore(@PathVariable(name = "id") Long id);
 
+  @Operation(summary = "Get Products Stocks CSV", security = @SecurityRequirement(name = "adfs"))
+  @GetMapping("/products-csv")
+  ResponseEntity<String> getProductsCsv();
+
   @Operation(summary = "Summary Store", security = @SecurityRequirement(name = "adfs"))
   @GetMapping("/{id}/summary")
   ResponseEntity<StoreSummaryResponse> getSummary(@PathVariable Long id);

@@ -1,4 +1,4 @@
-package com.mercadona.mbordoya.web.main.domain;
+package com.mercadona.mbordoya.web.main.domain.store;
 
 import lombok.Builder;
 import lombok.Data;

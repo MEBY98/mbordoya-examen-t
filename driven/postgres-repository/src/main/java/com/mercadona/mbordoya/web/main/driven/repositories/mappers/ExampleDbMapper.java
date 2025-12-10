@@ -1,7 +1,7 @@
 package com.mercadona.mbordoya.web.main.driven.repositories.mappers;
 
-import com.mercadona.mbordoya.web.main.domain.ExampleChildDomain;
-import com.mercadona.mbordoya.web.main.domain.ExampleDomain;
+import com.mercadona.mbordoya.web.main.domain.example.ExampleChildDomain;
+import com.mercadona.mbordoya.web.main.domain.example.ExampleDomain;
 import com.mercadona.mbordoya.web.main.driven.repositories.models.ExampleChildMO;
 import com.mercadona.mbordoya.web.main.driven.repositories.models.ExampleMO;
 import org.mapstruct.Mapper;

@@ -1,7 +1,7 @@
 package com.mercadona.mbordoya.web.main.application.use_cases;
 
-import com.mercadona.mbordoya.web.main.application.services.ExampleService;
-import com.mercadona.mbordoya.web.main.domain.ExampleDomain;
+import com.mercadona.mbordoya.web.main.application.services.example.ExampleService;
+import com.mercadona.mbordoya.web.main.domain.example.ExampleDomain;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

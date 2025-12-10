@@ -1,6 +1,6 @@
 package com.mercadona.mbordoya.web.main.application.events.example;
 
-import com.mercadona.mbordoya.web.main.application.services.ExampleService;
+import com.mercadona.mbordoya.web.main.application.services.example.ExampleService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;

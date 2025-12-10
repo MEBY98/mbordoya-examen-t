@@ -1,6 +1,6 @@
 package com.mercadona.mbordoya.web.main.driving.controllers.http_models.store.summary;
 
-import com.mercadona.mbordoya.web.main.domain.ModuleDomain;
+import com.mercadona.mbordoya.web.main.domain.store.ModuleDomain;
 import com.mercadona.mbordoya.web.main.driving.controllers.http_models.store.SpecializationNameResponse;
 import com.mercadona.mbordoya.web.main.driving.controllers.http_models.store.SpecializationResponse;
 import lombok.*;

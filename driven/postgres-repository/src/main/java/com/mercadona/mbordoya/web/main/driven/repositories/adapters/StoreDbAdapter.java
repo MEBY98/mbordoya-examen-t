@@ -1,10 +1,10 @@
 package com.mercadona.mbordoya.web.main.driven.repositories.adapters;
 
 import com.mercadona.mbordoya.web.main.application.ports.driven.StoreDbPort;
-import com.mercadona.mbordoya.web.main.domain.ModuleDomain;
-import com.mercadona.mbordoya.web.main.domain.Store;
-import com.mercadona.mbordoya.web.main.domain.StoreQuery;
-import com.mercadona.mbordoya.web.main.domain.StoreStorage;
+import com.mercadona.mbordoya.web.main.domain.store.ModuleDomain;
+import com.mercadona.mbordoya.web.main.domain.store.Store;
+import com.mercadona.mbordoya.web.main.domain.store.StoreQuery;
+import com.mercadona.mbordoya.web.main.domain.store.StoreStorage;
 import com.mercadona.mbordoya.web.main.driven.repositories.jpa_repositories.*;
 import com.mercadona.mbordoya.web.main.driven.repositories.mappers.StoreDBMapper;
 import com.mercadona.mbordoya.web.main.driven.repositories.specifications.StoreSpecification;
@@ -134,5 +134,17 @@ public class StoreDbAdapter implements StoreDbPort {
   @Transactional(readOnly = true)
   public List<StoreStorage> getStoreStorageWithStockByStoreId(final Long storeId) {
     return this.storeStorageJpaRepository.findAllByStoreId(storeId).stream().map(this.storeDBMapper::toStoreStorage).toList();
+  }
+
+  @Override
+  @Transactional(readOnly = true)
+  public List<ModuleDomain> getAllModulesWithStock() {
+    return this.moduleJpaRepository.findAll().stream().map(this.storeDBMapper::toModuleDomain).toList();
+  }
+
+  @Override
+  @Transactional(readOnly = true)
+  public List<StoreStorage> getAllStoreStoragesWithStock() {
+    return this.storeStorageJpaRepository.findAll().stream().map(this.storeDBMapper::toStoreStorage).toList();
   }
 }

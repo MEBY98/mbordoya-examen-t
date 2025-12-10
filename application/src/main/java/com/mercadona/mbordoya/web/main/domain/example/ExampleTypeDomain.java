@@ -1,5 +1,6 @@
-package com.mercadona.mbordoya.web.main.domain;
+package com.mercadona.mbordoya.web.main.domain.example;
 
+import com.mercadona.mbordoya.web.main.domain.LocaleLanguageTagEnum;
 import lombok.Builder;
 import lombok.Getter;
 import org.springframework.context.i18n.LocaleContextHolder;

@@ -2,10 +2,10 @@ package com.mercadona.mbordoya.web.main.application.use_cases;
 
 import com.mercadona.mbordoya.web.main.application.events.example.CreateExampleChildrenEvent;
 import com.mercadona.mbordoya.web.main.application.ports.driving.ExampleUseCasePort;
-import com.mercadona.mbordoya.web.main.application.services.ExampleDomainFiller;
-import com.mercadona.mbordoya.web.main.application.services.ExampleService;
-import com.mercadona.mbordoya.web.main.domain.ExampleChildDomain;
-import com.mercadona.mbordoya.web.main.domain.ExampleDomain;
+import com.mercadona.mbordoya.web.main.application.services.example.ExampleDomainFiller;
+import com.mercadona.mbordoya.web.main.application.services.example.ExampleService;
+import com.mercadona.mbordoya.web.main.domain.example.ExampleChildDomain;
+import com.mercadona.mbordoya.web.main.domain.example.ExampleDomain;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;

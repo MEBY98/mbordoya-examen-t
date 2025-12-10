@@ -1,14 +1,17 @@
 package com.mercadona.mbordoya.web.main.driving.controllers.adapters;
 
 import com.mercadona.mbordoya.web.main.application.ports.driving.ExampleUseCasePort;
-import com.mercadona.mbordoya.web.main.domain.ExampleDomain;
+import com.mercadona.mbordoya.web.main.domain.example.ExampleDomain;
 import com.mercadona.mbordoya.web.main.driving.controllers.api.ExampleApi;
 import com.mercadona.mbordoya.web.main.driving.controllers.http_models.ExampleCreateRequest;
 import com.mercadona.mbordoya.web.main.driving.controllers.mappers.ExampleControllerMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;

@@ -1,10 +1,9 @@
-package com.mercadona.mbordoya.web.main.application.services;
+package com.mercadona.mbordoya.web.main.application.services.security;
 
 import com.mercadona.mbordoya.web.main.application.exceptions.UserNotExistsException;
 import com.mercadona.mbordoya.web.main.application.ports.driven.UserDbPort;
 import com.mercadona.mbordoya.web.main.application.utils.BCryptUtils;
 import com.mercadona.mbordoya.web.main.domain.UserDomain;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

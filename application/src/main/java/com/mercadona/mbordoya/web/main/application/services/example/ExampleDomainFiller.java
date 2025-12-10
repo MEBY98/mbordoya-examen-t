@@ -1,6 +1,6 @@
-package com.mercadona.mbordoya.web.main.application.services;
+package com.mercadona.mbordoya.web.main.application.services.example;
 
-import com.mercadona.mbordoya.web.main.domain.ExampleDomain;
+import com.mercadona.mbordoya.web.main.domain.example.ExampleDomain;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

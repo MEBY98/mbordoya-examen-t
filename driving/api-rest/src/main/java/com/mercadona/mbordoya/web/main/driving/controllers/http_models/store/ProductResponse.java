@@ -1,6 +1,6 @@
 package com.mercadona.mbordoya.web.main.driving.controllers.http_models.store;
 
-import com.mercadona.mbordoya.web.main.domain.Product;
+import com.mercadona.mbordoya.web.main.domain.store.Product;
 import lombok.*;
 
 @AllArgsConstructor

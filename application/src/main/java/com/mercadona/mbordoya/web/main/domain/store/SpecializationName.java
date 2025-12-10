@@ -1,4 +1,4 @@
-package com.mercadona.mbordoya.web.main.domain;
+package com.mercadona.mbordoya.web.main.domain.store;
 
 import lombok.Builder;
 import lombok.Data;
@@ -7,9 +7,11 @@ import static com.mercadona.mbordoya.web.main.application.utils.AppConstants.SPA
 
 @Data
 @Builder
-public class ExampleTypeNameDomain {
-  private String description;
+public class SpecializationName {
+
+  private Long id;
   private String localeLanguageCode;
+  private String name;
 
   public boolean isSpanish() {
     return SPANISH_LOCALE.equals(localeLanguageCode);

@@ -1,6 +1,6 @@
 package com.mercadona.mbordoya.web.main.application.ports.driven;
 
-import com.mercadona.mbordoya.web.main.domain.ExampleTypeDomain;
+import com.mercadona.mbordoya.web.main.domain.example.ExampleTypeDomain;
 
 import java.util.List;
 

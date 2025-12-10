@@ -1,7 +1,7 @@
 package com.mercadona.mbordoya.web.main.driving.controllers.http_models.store.summary_alert;
 
-import com.mercadona.mbordoya.web.main.domain.Product;
-import com.mercadona.mbordoya.web.main.domain.StoreStorage;
+import com.mercadona.mbordoya.web.main.domain.store.Product;
+import com.mercadona.mbordoya.web.main.domain.store.StoreStorage;
 import com.mercadona.mbordoya.web.main.driving.controllers.http_models.store.ProductResponse;
 import lombok.*;
 

@@ -1,4 +1,4 @@
-package com.mercadona.mbordoya.web.main.application.services;
+package com.mercadona.mbordoya.web.main.application.services.security;
 
 import com.mercadona.mbordoya.web.main.application.utils.BCryptUtils;
 import com.mercadona.mbordoya.web.main.application.utils.JwtUtil;

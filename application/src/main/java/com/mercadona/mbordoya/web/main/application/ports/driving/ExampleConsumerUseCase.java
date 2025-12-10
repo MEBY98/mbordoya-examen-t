@@ -1,6 +1,6 @@
 package com.mercadona.mbordoya.web.main.application.ports.driving;
 
-import com.mercadona.mbordoya.web.main.domain.ExampleDomain;
+import com.mercadona.mbordoya.web.main.domain.example.ExampleDomain;
 
 public interface ExampleConsumerUseCase {
 

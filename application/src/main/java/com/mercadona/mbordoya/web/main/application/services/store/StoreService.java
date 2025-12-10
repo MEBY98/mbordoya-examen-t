@@ -1,11 +1,12 @@
 package com.mercadona.mbordoya.web.main.application.services.store;
 
 import com.mercadona.mbordoya.web.main.application.exceptions.StoreNotFoundException;
+import com.mercadona.mbordoya.web.main.application.ports.driven.StoreBucketPort;
 import com.mercadona.mbordoya.web.main.application.ports.driven.StoreDbPort;
-import com.mercadona.mbordoya.web.main.domain.ModuleDomain;
-import com.mercadona.mbordoya.web.main.domain.Store;
-import com.mercadona.mbordoya.web.main.domain.StoreQuery;
-import com.mercadona.mbordoya.web.main.domain.StoreStorage;
+import com.mercadona.mbordoya.web.main.domain.store.ModuleDomain;
+import com.mercadona.mbordoya.web.main.domain.store.Store;
+import com.mercadona.mbordoya.web.main.domain.store.StoreQuery;
+import com.mercadona.mbordoya.web.main.domain.store.StoreStorage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ import java.util.List;
 public class StoreService {
 
   private final StoreDbPort storeDbPort;
+  private final StoreBucketPort storeBucketPort;
 
   public Long insertStore(final Store storeDomain) {
     return this.storeDbPort.insert(storeDomain);
@@ -82,5 +84,17 @@ public class StoreService {
 
   public List<StoreStorage> getStoreStoragesWithStockByStoreId(final Long id) {
     return this.storeDbPort.getStoreStorageWithStockByStoreId(id);
+  }
+
+  public List<ModuleDomain> getAllModulesWithStock() {
+    return this.storeDbPort.getAllModulesWithStock();
+  }
+
+  public List<StoreStorage> getAllStoreStoragesWithStock() {
+    return this.storeDbPort.getAllStoreStoragesWithStock();
+  }
+
+  public String uploadProductCsv(final byte[] bytes) {
+    return this.storeBucketPort.uploadProductCsv(bytes).toString();
   }
 }

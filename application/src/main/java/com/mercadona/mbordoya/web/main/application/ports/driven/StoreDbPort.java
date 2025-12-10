@@ -1,9 +1,9 @@
 package com.mercadona.mbordoya.web.main.application.ports.driven;
 
-import com.mercadona.mbordoya.web.main.domain.ModuleDomain;
-import com.mercadona.mbordoya.web.main.domain.Store;
-import com.mercadona.mbordoya.web.main.domain.StoreQuery;
-import com.mercadona.mbordoya.web.main.domain.StoreStorage;
+import com.mercadona.mbordoya.web.main.domain.store.ModuleDomain;
+import com.mercadona.mbordoya.web.main.domain.store.Store;
+import com.mercadona.mbordoya.web.main.domain.store.StoreQuery;
+import com.mercadona.mbordoya.web.main.domain.store.StoreStorage;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
@@ -42,4 +42,8 @@ public interface StoreDbPort {
   List<ModuleDomain> getModulesWithStockByStoreId(Long id);
 
   List<StoreStorage> getStoreStorageWithStockByStoreId(Long id);
+
+  List<ModuleDomain> getAllModulesWithStock();
+
+  List<StoreStorage> getAllStoreStoragesWithStock();
 }

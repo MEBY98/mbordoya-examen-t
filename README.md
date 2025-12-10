@@ -243,3 +243,5 @@ EXAMPLE_NOT_FOUND_ERROR_CODE_DETAIL=Não foi encontrado o exemplo com id {0}
 un caso real eso no seria posible debido que el artefacto del contrato vendría como una dependencia del POM generado por la
 pipeline de cloudbees "contract-first", en ese caso se aplicaría el patron "assembler", que es básicamente un mapper vitaminado,
 donde implementaría toda esa lógica de mapeos y creación de objetos. https://www.arquitecturajava.com/dto-assembler-un-patron-de-diseno/
+2. Para la subido del fichero CSV con los datos del stock de los productos, se ha dockerizado minio como bucket y el 
+archivo CSV es guardado en el bucket de forma local, devolviendo en la respuesta de la API una URL para descargar dicho archivo.

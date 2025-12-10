@@ -1,7 +1,7 @@
 package com.mercadona.mbordoya.web.main.driven.repositories.adapters;
 
 import com.mercadona.mbordoya.web.main.application.ports.driven.SpecializationDbPort;
-import com.mercadona.mbordoya.web.main.domain.Specialization;
+import com.mercadona.mbordoya.web.main.domain.store.Specialization;
 import com.mercadona.mbordoya.web.main.driven.repositories.jpa_repositories.SpecializationJpaRepository;
 import com.mercadona.mbordoya.web.main.driven.repositories.mappers.SpecializationDBMapper;
 import lombok.RequiredArgsConstructor;

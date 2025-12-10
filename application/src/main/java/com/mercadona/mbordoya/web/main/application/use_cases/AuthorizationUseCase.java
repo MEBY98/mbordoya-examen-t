@@ -3,7 +3,7 @@ package com.mercadona.mbordoya.web.main.application.use_cases;
 import com.mercadona.mbordoya.web.main.application.exceptions.InvalidPasswordException;
 import com.mercadona.mbordoya.web.main.application.exceptions.UserNotExistsException;
 import com.mercadona.mbordoya.web.main.application.ports.driving.AuthorizationUseCasePort;
-import com.mercadona.mbordoya.web.main.application.services.AuthorizationService;
+import com.mercadona.mbordoya.web.main.application.services.security.AuthorizationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

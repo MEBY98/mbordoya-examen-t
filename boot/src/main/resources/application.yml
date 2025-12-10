@@ -116,6 +116,18 @@ fwkcna:
       credentials:
         access-key: ${MINIO_ACCESS_KEY}
         secret-key: ${MINIO_SECRET_KEY}
+    - id: minio_local_store_bucket
+      bucket-name: storebucket
+      enabled: true
+      provider: minio
+      url: ${MINIO_SERVER_URL}
+      trust-all-certs: true
+      relax-hostname: true
+      virtual-host-buckets: false
+      signed-operation-token-expiration: 120
+      credentials:
+        access-key: ${MINIO_ACCESS_KEY}
+        secret-key: ${MINIO_SECRET_KEY}
 
 server:
   port: 8080

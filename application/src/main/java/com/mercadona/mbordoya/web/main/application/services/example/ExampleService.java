@@ -1,17 +1,16 @@
-package com.mercadona.mbordoya.web.main.application.services;
+package com.mercadona.mbordoya.web.main.application.services.example;
 
 import com.mercadona.mbordoya.web.main.application.exceptions.ExampleNotFoundException;
 import com.mercadona.mbordoya.web.main.application.ports.driven.ExampleBucketPort;
 import com.mercadona.mbordoya.web.main.application.ports.driven.ExampleDbPort;
 import com.mercadona.mbordoya.web.main.application.ports.driven.ExampleProducerPort;
-import com.mercadona.mbordoya.web.main.domain.ExampleChildDomain;
-import com.mercadona.mbordoya.web.main.domain.ExampleDomain;
+import com.mercadona.mbordoya.web.main.domain.example.ExampleChildDomain;
+import com.mercadona.mbordoya.web.main.domain.example.ExampleDomain;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 
 @Service
 @Slf4j

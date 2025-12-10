@@ -1,9 +1,9 @@
 package com.mercadona.mbordoya.web.main.driving.controllers.mappers;
 
-import com.mercadona.mbordoya.web.main.domain.ModuleDomain;
-import com.mercadona.mbordoya.web.main.domain.Specialization;
-import com.mercadona.mbordoya.web.main.domain.SpecializationName;
-import com.mercadona.mbordoya.web.main.domain.Store;
+import com.mercadona.mbordoya.web.main.domain.store.ModuleDomain;
+import com.mercadona.mbordoya.web.main.domain.store.Specialization;
+import com.mercadona.mbordoya.web.main.domain.store.SpecializationName;
+import com.mercadona.mbordoya.web.main.domain.store.Store;
 import com.mercadona.mbordoya.web.main.driving.controllers.http_models.store.*;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

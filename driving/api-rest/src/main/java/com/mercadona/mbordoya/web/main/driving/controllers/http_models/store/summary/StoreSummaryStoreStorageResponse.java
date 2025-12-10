@@ -1,6 +1,6 @@
 package com.mercadona.mbordoya.web.main.driving.controllers.http_models.store.summary;
 
-import com.mercadona.mbordoya.web.main.domain.StoreStorage;
+import com.mercadona.mbordoya.web.main.domain.store.StoreStorage;
 import lombok.*;
 
 import java.util.List;
