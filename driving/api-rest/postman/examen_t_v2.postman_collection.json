@@ -1,0 +1,426 @@
+{
+	"info": {
+		"_postman_id": "2fc0e327-2a1b-4b18-b150-87c891f3fce7",
+		"name": "examen_t_v2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31731801",
+		"_collection_link": "https://interstellar-zodiac-430166.postman.co/workspace/Team-Workspace~81540c31-62ac-4a6d-8b3f-a47a62b84c25/collection/31731801-2fc0e327-2a1b-4b18-b150-87c891f3fce7?action=share&source=collection_link&creator=31731801"
+	},
+	"item": [
+		{
+			"name": "Create Store",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYm9yZG95YSIsImlhdCI6MTc2NTM2Njg3MiwiZXhwIjoxNzY1MzcwNDcyfQ.RPzKvMllh-_CqD2C-uef4zZvVLu0_tg4Qptwhx37uuA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"NIURKA STORE\",\n    \"address\": \"NIURKA ADDRESS\",\n    \"modules\": [\n        {\n            \"capacity\": 20,\n            \"specializationId\": 1\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/stores",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"stores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Example",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYm9yZG95YSIsImlhdCI6MTc2NTE5NzU3NSwiZXhwIjoxNzY1MjAxMTc1fQ.fIFclkuRFN8soxuwdRjlUkLGjwviOXY2Xpej3JMQiQM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"typeId\": 1,\n    \"name\": \"MARCOS EXAMPLE 2\",\n    \"exampleChildCreateRequestList\": [\n        {\n            \"childDescription\": \"CHILD DESCRIPTION 1\"\n        },\n        {\n            \"childDescription\": \"CHILD DESCRIPTION 2\"\n        },\n        {\n            \"childDescription\": \"CHILD DESCRIPTION 3\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/examples",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"examples"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Example By Id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYm9yZG95YSIsImlhdCI6MTc2NTE5NzAwMiwiZXhwIjoxNzY1MjAwNjAyfQ.ttAAK_iBR8ulYVMLePaE_MrESZcgxTIJhsI3t7uK8l8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "es-ES"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/examples/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"examples",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Children CSV",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiaWF0IjoxNzY1MTI0MjgwLCJleHAiOjE3NjUxMjc4ODB9.ikEeE3VM0h7ETofS_CNQSdFYIDgpfXS88u_epU_iU4w",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/Users/mbordoya/create_example_children.csv"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/examples/1/children-csv",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"examples",
+						"1",
+						"children-csv"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Example Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"mbordoya\",\n    \"password\": \"123456789\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/auth/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"auth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"mbordoya\",\n    \"password\": \"123456789\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Store By Id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYm9yZG95YSIsImlhdCI6MTc2NTM2NTgyMSwiZXhwIjoxNzY1MzY5NDIxfQ.FT_vWWgrlrVhpYwguv9IYogOwsLnT52etBMb7K_i2v4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "es-ES"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/stores/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"stores",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Stores",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYm9yZG95YSIsImlhdCI6MTc2NTM2Njg3MiwiZXhwIjoxNzY1MzcwNDcyfQ.RPzKvMllh-_CqD2C-uef4zZvVLu0_tg4Qptwhx37uuA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "pt-PT"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/stores?page=0&pageSize=20",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"stores"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "pageSize",
+							"value": "20"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Store",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtYm9yZG95YSIsImlhdCI6MTc2NTM2Njg3MiwiZXhwIjoxNzY1MzcwNDcyfQ.RPzKvMllh-_CqD2C-uef4zZvVLu0_tg4Qptwhx37uuA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"NAME ACTUALIZADO\",\n    \"address\": \"ADDRESS ACTUALIZADA\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/stores/:storeId",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"stores",
+						":storeId"
+					],
+					"variable": [
+						{
+							"key": "storeId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Store",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/stores/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"stores",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Summary Store",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/stores/1/summary",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"stores",
+						"1",
+						"summary"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Summary Alert Store",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/stores/3/summary-alerts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"stores",
+						"3",
+						"summary-alerts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Products Csv",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/stores/products-csv",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"stores",
+						"products-csv"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

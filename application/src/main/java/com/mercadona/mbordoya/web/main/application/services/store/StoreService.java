@@ -1,17 +1,17 @@
 package com.mercadona.mbordoya.web.main.application.services.store;
 
 import com.mercadona.mbordoya.web.main.application.exceptions.StoreNotFoundException;
+import com.mercadona.mbordoya.web.main.application.exceptions.StoreStorageNotHasSpaceException;
 import com.mercadona.mbordoya.web.main.application.ports.driven.StoreBucketPort;
 import com.mercadona.mbordoya.web.main.application.ports.driven.StoreDbPort;
-import com.mercadona.mbordoya.web.main.domain.store.ModuleDomain;
-import com.mercadona.mbordoya.web.main.domain.store.Store;
-import com.mercadona.mbordoya.web.main.domain.store.StoreQuery;
-import com.mercadona.mbordoya.web.main.domain.store.StoreStorage;
+import com.mercadona.mbordoya.web.main.domain.store.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
+import static java.util.Comparator.comparing;
 
 @Service
 @RequiredArgsConstructor
@@ -96,5 +96,71 @@ public class StoreService {
 
   public String uploadProductCsv(final byte[] bytes) {
     return this.storeBucketPort.uploadProductCsv(bytes).toString();
+  }
+
+  public void processMovementTypeVEAndRO(final List<ModuleStock> moduleStocks, final List<MovementRecord> movements) {
+    final var movementsVEAndRO = movements.stream().filter(MovementRecord::isVEOrRO).toList();
+
+    movementsVEAndRO.forEach(movementRecordVE -> {
+      final var moduleProductStocks = moduleStocks.stream()
+          .filter(moduleStock -> moduleStock.getProduct().getId().equals(movementRecordVE.productId()))
+          .sorted(comparing(ModuleStock::getQuantity))
+          .toList();
+
+      boolean movementApplied = false;
+      int i = 0;
+      while (!movementApplied && i < moduleProductStocks.size()) {
+        final var moduleStock = moduleProductStocks.get(i);
+        if (moduleStock.getQuantity() >= movementRecordVE.quantity()) {
+          moduleStock.setQuantity(moduleStock.getQuantity() - movementRecordVE.quantity());
+          movementApplied = true;
+        } else {
+          i++;
+        }
+      }
+
+      if (!movementApplied) {
+        moduleProductStocks.getFirst().setQuantity(0);
+      }
+    });
+  }
+
+  public void processMovementTypeEA(final List<StoreStorage> storeStorages, final List<MovementRecord> movements) {
+    final var movementsEA = movements.stream().filter(MovementRecord::isEA).toList();
+
+    movementsEA.forEach(movementRecordEA -> {
+      boolean movementApplied = false;
+      int i = 0;
+
+      while (!movementApplied && i < storeStorages.size()) {
+        final var storeStorage = storeStorages.get(i);
+        if (storeStorage.getRemainSpace() >= movementRecordEA.quantity()) {
+          if (storeStorage.containProductInStock(movementRecordEA.productId())) {
+            storeStorage.getStoreStorageStockByProductId(movementRecordEA.productId())
+                .ifPresent(storeStorageStock -> storeStorageStock.setQuantity(storeStorageStock.getQuantity() + movementRecordEA.quantity()));
+          } else {
+            storeStorage.getStoreStorageStocks().add(StoreStorageStock.builder()
+                .product(Product.builder().id(movementRecordEA.productId()).build())
+                .quantity(movementRecordEA.quantity())
+                .build());
+          }
+          movementApplied = true;
+        } else {
+          i++;
+        }
+      }
+
+      if (!movementApplied) {
+        throw new StoreStorageNotHasSpaceException(movementRecordEA.productId(), movementRecordEA.quantity());
+      }
+    });
+  }
+
+  public void updateStoreStoragesStock(final List<StoreStorageStock> list) {
+    //TODO actualizar cada stock del almacen en BBDD
+  }
+
+  public void updateModulesStock(final List<ModuleStock> moduleStocks) {
+    //TODO actualizar cada stock del modulo en BBDD
   }
 }

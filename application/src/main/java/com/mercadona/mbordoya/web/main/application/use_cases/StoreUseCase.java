@@ -4,6 +4,7 @@ import com.mercadona.mbordoya.web.main.application.ports.driving.StoreUseCasePor
 import com.mercadona.mbordoya.web.main.application.services.store.ProductCsvWriter;
 import com.mercadona.mbordoya.web.main.application.services.store.StoreFiller;
 import com.mercadona.mbordoya.web.main.application.services.store.StoreService;
+import com.mercadona.mbordoya.web.main.domain.store.MovementRecord;
 import com.mercadona.mbordoya.web.main.domain.store.ProductCsvRecord;
 import com.mercadona.mbordoya.web.main.domain.store.Store;
 import com.mercadona.mbordoya.web.main.domain.store.StoreQuery;
@@ -90,5 +91,20 @@ public class StoreUseCase implements StoreUseCasePort {
     final var bytes = this.productCsvWriter.parseToBytesWithHeaders(productRecords);
 
     return this.storeService.uploadProductCsv(bytes);
+  }
+
+  @Override
+  public void processMovements(final Long storeId, final List<MovementRecord> movements) {
+    final var modules = this.storeService.getModulesWithStockByStoreId(storeId);
+    final var moduleStocks = modules.stream().flatMap(moduleDomain -> moduleDomain.getModuleStocks().stream()).toList();
+
+    final var storeStorages = this.storeService.getStoreStoragesWithStockByStoreId(storeId);
+
+    this.storeService.processMovementTypeVEAndRO(moduleStocks, movements);
+    this.storeService.processMovementTypeEA(storeStorages, movements);
+    //TODO hacer el process de los tipos de movimientos que falta: RP y RA
+
+    this.storeService.updateStoreStoragesStock(storeStorages.stream().flatMap(storeStorage -> storeStorage.getStoreStorageStocks().stream()).toList());
+    this.storeService.updateModulesStock(moduleStocks);
   }
 }

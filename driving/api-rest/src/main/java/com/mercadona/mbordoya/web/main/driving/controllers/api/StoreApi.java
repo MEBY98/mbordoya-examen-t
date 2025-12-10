@@ -8,6 +8,9 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @RequestMapping("/stores")
 @Tag(name = "Store API", description = "API for Store operations")
@@ -47,4 +50,8 @@ public interface StoreApi {
   @Operation(summary = "Summary Alert Store", security = @SecurityRequirement(name = "adfs"))
   @GetMapping("/{id}/summary-alerts")
   ResponseEntity<StoreAlertSummaryResponse> getSummaryAlerts(@PathVariable Long id);
+
+  @Operation(summary = "Summary Alert Store", security = @SecurityRequirement(name = "adfs"))
+  @PostMapping("/{id}/movement-csv")
+  ResponseEntity<Long> uploadMovementCsv(@PathVariable Long id, @RequestParam MultipartFile file) throws IOException;
 }

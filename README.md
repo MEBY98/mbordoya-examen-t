@@ -208,6 +208,13 @@ con ello intentamos lograr un enfoque de "contract-first" en el desarrollo de la
 Además, se han creado interfaces *Api.java* en el módulo api-rest, intentando seguir de la forma más acertada el patrón
 de "api-first".
 
+# POSTMAN COLLECTION
+
+Esta agregada la colección de Postman con las llamadas que he ido creando y utilizando para probar la aplicación:
+```
+/driving/api-rest/postman
+```
+
 # i18n
 
 Para la internacionalización de mensajes se han creado los archivos messages.properties (español) 
@@ -249,6 +256,7 @@ archivo CSV es guardado en el bucket de forma local, devolviendo en la respuesta
    1. StoreUseCaseTest.updateStore() ya que se aprecia el uso de ArgumentCaptor.
    2. StoreControllerTest ya que se aprecia el uso de MockMvc.
    3. StoreServiceTest ya que se aprecia el caso donde se captura la excepción
+   4. StoreDbAdapterTest caso sencillo de test de repositorio
 4. He creado historificacion para las tablas StoreMO, ModuleMO, StoreStorageMO que serian las tablas claves del dominio
 de la apliacación para en caso de querer auditar también el resto de tablas, la configuración es básicamente agregar:
 ```java
@@ -264,3 +272,7 @@ create table revinfo (
     )
 ```
 y las tablas de auditoría de las clases anotadas, en este caso serían: store_aud, module_aud, store_storage_aud
+5. De la parte 4 he logrado hacer el inicio del procesamiento de los tres primeros tipos de movimientos, no me ha 
+alcanzado el tiempo para hacer el resto, quedan reflejado los //TODO de los mismos, la lógica sería parecida, 
+seguir modificando los ModuleStock y StoreStorageStock en diferentes process y como últimos pasos realizar el update
+masivo de ambas listas de entidades.

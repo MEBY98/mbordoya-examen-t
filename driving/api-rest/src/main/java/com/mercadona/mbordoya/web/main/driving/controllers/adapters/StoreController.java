@@ -2,6 +2,8 @@ package com.mercadona.mbordoya.web.main.driving.controllers.adapters;
 
 import com.mercadona.framework.cna.commons.rest.api.model.Pagination;
 import com.mercadona.mbordoya.web.main.application.ports.driving.StoreUseCasePort;
+import com.mercadona.mbordoya.web.main.domain.store.MovementRecord;
+import com.mercadona.mbordoya.web.main.domain.store.MovementTypeEnum;
 import com.mercadona.mbordoya.web.main.domain.store.Store;
 import com.mercadona.mbordoya.web.main.domain.store.StoreQuery;
 import com.mercadona.mbordoya.web.main.driving.controllers.api.StoreApi;
@@ -13,6 +15,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.IntStream;
 
 @RestController
 @RequiredArgsConstructor
@@ -76,5 +85,26 @@ public class StoreController implements StoreApi {
   public ResponseEntity<StoreAlertSummaryResponse> getSummaryAlerts(final Long id) {
     final var store = this.storeUseCasePort.getStore(id);
     return ResponseEntity.ok(new StoreAlertSummaryResponse(store));
+  }
+
+  @Override
+  public ResponseEntity<Long> uploadMovementCsv(final Long id, final MultipartFile file) throws IOException {
+    final byte[] bytes = file.getBytes();
+    final String csvString = new String(bytes);
+    final List<String> rows = Arrays.asList(csvString.split("\n"));
+
+    final List<MovementRecord> movements = new LinkedList<>();
+    IntStream.range(0, rows.size()).forEach(i -> {
+      final String row = rows.get(i);
+      if (i > 0) {
+        final String[] rowSplit = row.split(";");
+        final var productId = Long.valueOf(rowSplit[0]);
+        final var movementType = MovementTypeEnum.valueOf(rowSplit[1]);
+        final var quantity = Integer.valueOf(rowSplit[2]);
+        movements.add(new MovementRecord(productId, movementType, quantity));
+      }
+    });
+    this.storeUseCasePort.processMovements(id, movements);
+    return ResponseEntity.ok(id);
   }
 }
