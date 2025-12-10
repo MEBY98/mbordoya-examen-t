@@ -39,7 +39,7 @@ public class StoreService {
   }
 
   public Store getById(final Long id) {
-    return this.storeDbPort.findById(id).orElseThrow(StoreNotFoundException::new);
+    return this.storeDbPort.findById(id).orElseThrow(() -> new StoreNotFoundException(id));
   }
 
   public Page<Store> getStores(final StoreQuery query) {

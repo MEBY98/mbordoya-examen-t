@@ -245,3 +245,7 @@ pipeline de cloudbees "contract-first", en ese caso se aplicaría el patron "ass
 donde implementaría toda esa lógica de mapeos y creación de objetos. https://www.arquitecturajava.com/dto-assembler-un-patron-de-diseno/
 2. Para la subido del fichero CSV con los datos del stock de los productos, se ha dockerizado minio como bucket y el 
 archivo CSV es guardado en el bucket de forma local, devolviendo en la respuesta de la API una URL para descargar dicho archivo.
+3. Los tests mas significativos seria: 
+   1. StoreUseCaseTest.updateStore() ya que se aprecia el uso de ArgumentCaptor.
+   2. StoreControllerTest ya que se aprecia el uso de MockMvc.
+   3. StoreServiceTest ya que se aprecia el caso donde se captura la excepción
