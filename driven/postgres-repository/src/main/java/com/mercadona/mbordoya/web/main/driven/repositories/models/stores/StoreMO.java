@@ -1,9 +1,12 @@
 package com.mercadona.mbordoya.web.main.driven.repositories.models.stores;
 
+import com.mercadona.framework.cna.lib.jpa.auditing.AuditableEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
 
 import java.util.List;
 
@@ -12,7 +15,8 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class StoreMO {
+@Audited
+public class StoreMO extends AuditableEntity {
 
   @Id
   @Column(name = "id")
@@ -26,9 +30,11 @@ public class StoreMO {
   @Column(name = "address")
   private String address;
 
+  @NotAudited
   @OneToMany(mappedBy = "storeMO", fetch = FetchType.LAZY)
   private List<ModuleMO> moduleMOS;
 
+  @NotAudited
   @OneToMany(mappedBy = "storeMO", fetch = FetchType.LAZY)
   private List<StoreStorageMO> storeStorageMOS;
 }

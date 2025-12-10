@@ -35,8 +35,8 @@ INSERT INTO product(id, name, selling_price, specialization_id) VALUES(10,'Mochi
 WITH next_id AS (
   SELECT nextval('store_id_seq') AS store_id
 )
-INSERT INTO STORE (id, name, address)
-SELECT store_id, 'Store A', '123 Main St' FROM next_id;
+INSERT INTO STORE (id, name, address, created_by, created_date)
+SELECT store_id, 'Store A', '123 Main St', 'INICIAL', now() FROM next_id;
 
 --module 1 store 1
 WITH next_id AS (
