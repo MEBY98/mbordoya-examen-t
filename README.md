@@ -202,7 +202,7 @@ con ello intentamos lograr un enfoque de "contract-first" en el desarrollo de la
 <dependency>
       <groupId>org.springdoc</groupId>
       <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-      <version>2.8.14</version>
+      <version>2.6.0</version>
 </dependency>
 ```
 Además, se han creado interfaces *Api.java* en el módulo api-rest, intentando seguir de la forma más acertada el patrón
@@ -236,3 +236,10 @@ EXAMPLE_NOT_FOUND_ERROR_CODE_DETAIL=No se ha encontrado el ejemplo con id {0}
 EXAMPLE_NOT_FOUND_ERROR_CODE=Exemplo não encontrado
 EXAMPLE_NOT_FOUND_ERROR_CODE_DETAIL=Não foi encontrado o exemplo com id {0}
 ```
+
+# CONSIDERACIONES DEL DESARROLLADOR
+
+1. He creado la lógica de crear los objetos de respuesta en las propias clases de los DTOs en la capa de api-rest, en
+un caso real eso no seria posible debido que el artefacto del contrato vendría como una dependencia del POM generado por la
+pipeline de cloudbees "contract-first", en ese caso se aplicaría el patron "assembler", que es básicamente un mapper vitaminado,
+donde implementaría toda esa lógica de mapeos y creación de objetos. https://www.arquitecturajava.com/dto-assembler-un-patron-de-diseno/
