@@ -1,126 +1,674 @@
 openapi: 3.0.1
 info:
-  title: Mbordoya Examen T
-  description: Examen T contrato de API
-  contact:
-    name: mbordoya
-  version: 1.0.0
+  title: PRUEBA T
+  description: PRUEBA T
+  version: v1.0.0
 servers:
-  - url: 'http://localhost:8080'
+  - url: http://localhost:8080
+    description: Generated server url
 tags:
-  - name: ExampleTag
-    description: Example tag description.
+  - name: Example API
+    description: API for Example operations
+  - name: Auth API
+    description: Login Api
+  - name: Store API
+    description: API for Store operations
+  - name: User API
+    description: User Api
 paths:
-  /examples:
-    post:
+  /stores/{id}:
+    get:
       tags:
-        - ExampleTag
-      description: Create new Order Group.
-      summary: Create new Order Group.
-      operationId: createOrderGroup
+        - Store API
+      summary: Get store by Id
+      operationId: getStoreById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/StoreResponse"
+      security:
+        - adfs: []
+    put:
+      tags:
+        - Store API
+      summary: Update Store
+      operationId: updateStore
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/exampleDto'
+              $ref: "#/components/schemas/StoreUpdateRequest"
+        required: true
       responses:
         "200":
-          description: Successful operation.
+          description: OK
           content:
-            application/json:
+            '*/*':
               schema:
-                $ref: '#/components/schemas/exampleDto'
-components:
-  schemas:
-    exampleDto:
-      type: object
-      properties:
-        long:
-          type: integer
-          format: int64
-        integer:
-          type: integer
-          format: int32
-        localDate:
-          type: string
-          format: date
-        offsetDateTime:
-          type: string
-          format: date-time
-  headers:
-    Retry-After:
-      description: '- Quantity of seconds the next request to be accepted.'
-      schema:
-        type: integer
-        format: int32
-    X-Rate-Limit:
-      schema:
-        type: string
-      description: |-
-        - Informs the state of the requests window to be accepted. It's format will be ```[{"window":0,"type":"throttle","remaining":9}]```, meaning:
-          - \"window: 0\": Seconds until next window for requests to be accepted again, if no more requests are being accepted.
-          - \"type: throttle\": When limit is reached, requests will be cut off.
-          - \"remaining: 9\": Remaining requests to be accepted until next window.
-  responses:
-    BadRequest:
-      description: Bad request.
-      headers:
-        X-Rate-Limit:
-          $ref: '#/components/headers/XRateLimit'
-      content:
-        application/json:
+                $ref: "#/components/schemas/StoreUpdatedResponse"
+      security:
+        - adfs: []
+    delete:
+      tags:
+        - Store API
+      summary: Delete Store
+      operationId: deleteStore
+      parameters:
+        - name: id
+          in: path
+          required: true
           schema:
-            $ref: '#/components/schemas/ErrorModelV1'
-    UnauthorizedRequest:
-      description: Unauthorized request
-      headers:
-        X-Rate-Limit:
-          $ref: '#/components/headers/XRateLimit'
-    Forbidden:
-      description: Forbidden request
-      headers:
-        X-Rate-Limit:
-          $ref: '#/components/headers/XRateLimit'
-    NotFound:
-      description: Not found
-      headers:
-        X-Rate-Limit:
-          $ref: '#/components/headers/XRateLimit'
-    Timeout:
-      description: Request timeout
-      headers:
-        X-Rate-Limit:
-          $ref: '#/components/headers/XRateLimit'
-    PayloadTooLarge:
-      description: Payload too large
-      headers:
-        X-Rate-Limit:
-          $ref: '#/components/headers/XRateLimit'
-    UnsupportedMediaFormat:
-      description: Unsoported media format
-      headers:
-        X-Rate-Limit:
-          $ref: '#/components/headers/XRateLimit'
-    TooManyRequests:
-      description: Too many requests
-      headers:
-        X-Rate-Limit:
-          $ref: '#/components/headers/XRateLimit'
-        Retry-After:
-          description: "- Quantity of seconds the next request to be accepted."
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: integer
+                format: int64
+      security:
+        - adfs: []
+  /user:
+    post:
+      tags:
+        - User API
+      summary: Create user
+      operationId: createUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserCreateRequest"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+      security:
+        - adfs: []
+  /stores:
+    get:
+      tags:
+        - Store API
+      summary: Get stores
+      operationId: getStores
+      parameters:
+        - name: page
+          in: query
+          required: false
           schema:
             type: integer
             format: int32
-    InternalServerError:
-      description: Internal server error
-      content:
-        application/json:
+            default: 1
+        - name: pageSize
+          in: query
+          required: false
           schema:
-            $ref: '#/components/schemas/ErrorModelV1'
-    GatewayTimeout:
-      description: Gateway timeout
-      content:
-        application/json:
+            type: integer
+            format: int32
+            default: 10
+        - name: sort
+          in: query
+          required: false
           schema:
-            $ref: '#/components/schemas/ErrorModelV1'
-x-original-swagger-version: '2.0'
+            type: string
+            default: -id
+        - name: name
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/StorePaginatedResponse"
+      security:
+        - adfs: []
+    post:
+      tags:
+        - Store API
+      summary: Create store
+      operationId: createStore
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StoreCreateRequest"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: integer
+                format: int64
+      security:
+        - adfs: []
+  /examples:
+    post:
+      tags:
+        - Example API
+      summary: Create example
+      operationId: createExample
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExampleCreateRequest"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: integer
+                format: int64
+      security:
+        - adfs: []
+  /examples/{id}/children-csv:
+    post:
+      tags:
+        - Example API
+      summary: Upload example children from CSV
+      operationId: uploadCsvWithOrders
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - file
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ExampleDomain"
+      security:
+        - adfs: []
+  /auth/token:
+    post:
+      tags:
+        - Auth API
+      summary: Login user
+      operationId: getAccessToken
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginRequest"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/TokenResponse"
+  /stores/{id}/summary:
+    get:
+      tags:
+        - Store API
+      summary: Summary Store
+      operationId: getSummary
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/StoreSummaryResponse"
+      security:
+        - adfs: []
+  /stores/{id}/summary-alerts:
+    get:
+      tags:
+        - Store API
+      summary: Summary Alert Store
+      operationId: getSummaryAlerts
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/StoreAlertSummaryResponse"
+      security:
+        - adfs: []
+  /stores/products-csv:
+    get:
+      tags:
+        - Store API
+      summary: Get Products Stocks CSV
+      operationId: getProductsCsv
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+      security:
+        - adfs: []
+  /examples/{id}:
+    get:
+      tags:
+        - Example API
+      summary: Get example by ID
+      operationId: getExample
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ExampleDomain"
+      security:
+        - adfs: []
+  /error:
+    get:
+      tags:
+        - custom-error-controller
+      operationId: handleError
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResourceResponse"
+components:
+  schemas:
+    StoreUpdateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        address:
+          type: string
+    StoreUpdatedResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        address:
+          type: string
+    UserCreateRequest:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+    StoreCreateModuleItemRequest:
+      type: object
+      properties:
+        capacity:
+          type: integer
+          format: int32
+        specializationId:
+          type: integer
+          format: int64
+    StoreCreateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        address:
+          type: string
+        modules:
+          type: array
+          items:
+            $ref: "#/components/schemas/StoreCreateModuleItemRequest"
+    ExampleChildCreateRequest:
+      type: object
+      properties:
+        childDescription:
+          type: string
+    ExampleCreateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        typeId:
+          type: integer
+          format: int64
+        exampleChildCreateRequestList:
+          type: array
+          items:
+            $ref: "#/components/schemas/ExampleChildCreateRequest"
+    ExampleChildDomain:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        childDescription:
+          type: string
+        exampleDomain:
+          $ref: "#/components/schemas/ExampleDomain"
+    ExampleDomain:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        exampleTypeDomain:
+          $ref: "#/components/schemas/ExampleTypeDomain"
+        exampleChildMOs:
+          type: array
+          items:
+            $ref: "#/components/schemas/ExampleChildDomain"
+    ExampleTypeDomain:
+      type: object
+      properties:
+        typeId:
+          type: integer
+          format: int64
+        exampleTypeNameDomains:
+          type: array
+          items:
+            $ref: "#/components/schemas/ExampleTypeNameDomain"
+        localizedName:
+          $ref: "#/components/schemas/ExampleTypeNameDomain"
+    ExampleTypeNameDomain:
+      type: object
+      properties:
+        description:
+          type: string
+        localeLanguageCode:
+          type: string
+        spanish:
+          type: boolean
+    LoginRequest:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+    TokenResponse:
+      type: object
+      properties:
+        username:
+          type: string
+        accessToken:
+          type: string
+        tokenType:
+          type: string
+    Pagination:
+      type: object
+      properties:
+        requestedPage:
+          type: integer
+          format: int32
+        requestedSize:
+          type: integer
+          format: int32
+        retrievedResults:
+          type: integer
+          format: int32
+        totalResults:
+          type: integer
+          format: int64
+        nextPage:
+          type: string
+        previousPage:
+          type: string
+    SpecializationNameResponse:
+      type: object
+      properties:
+        localeLanguageCode:
+          type: string
+        name:
+          type: string
+    SpecializationResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        specializationName:
+          $ref: "#/components/schemas/SpecializationNameResponse"
+    StoreModuleResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        capacity:
+          type: integer
+          format: int32
+        specialization:
+          $ref: "#/components/schemas/SpecializationResponse"
+    StorePaginatedResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/StoreResponse"
+        pagination:
+          $ref: "#/components/schemas/Pagination"
+    StoreResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        address:
+          type: string
+        modules:
+          type: array
+          items:
+            $ref: "#/components/schemas/StoreModuleResponse"
+    ProductResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+    StoreSummaryModuleProductResponse:
+      type: object
+      properties:
+        product:
+          $ref: "#/components/schemas/ProductResponse"
+        quantity:
+          type: integer
+          format: int32
+    StoreSummaryModuleResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        capacity:
+          type: integer
+          format: int32
+        specialization:
+          $ref: "#/components/schemas/SpecializationResponse"
+        products:
+          type: array
+          items:
+            $ref: "#/components/schemas/StoreSummaryModuleProductResponse"
+    StoreSummaryResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        address:
+          type: string
+        modules:
+          type: array
+          items:
+            $ref: "#/components/schemas/StoreSummaryModuleResponse"
+        storeStorages:
+          type: array
+          items:
+            $ref: "#/components/schemas/StoreSummaryStoreStorageResponse"
+    StoreSummaryStoreStorageProductResponse:
+      type: object
+      properties:
+        product:
+          $ref: "#/components/schemas/ProductResponse"
+        quantity:
+          type: integer
+          format: int32
+    StoreSummaryStoreStorageResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        capacity:
+          type: integer
+          format: int32
+        products:
+          type: array
+          items:
+            $ref: "#/components/schemas/StoreSummaryStoreStorageProductResponse"
+    StoreAlertSummaryResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        address:
+          type: string
+        modules:
+          type: array
+          items:
+            $ref: "#/components/schemas/StoreSummaryAlertModuleResponse"
+        storeStorages:
+          type: array
+          items:
+            $ref: "#/components/schemas/StoreSummaryAlertStoreStorageResponse"
+    StoreSummaryAlertModuleResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        capacity:
+          type: integer
+          format: int32
+        specialization:
+          $ref: "#/components/schemas/SpecializationResponse"
+        productHoles:
+          type: array
+          items:
+            $ref: "#/components/schemas/ProductResponse"
+    StoreSummaryAlertStoreStorageResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        capacity:
+          type: integer
+          format: int32
+        productsUnexposed:
+          type: array
+          items:
+            $ref: "#/components/schemas/ProductResponse"
+    ErrorResource:
+      type: object
+      properties:
+        code:
+          type: string
+        description:
+          type: string
+        details:
+          type: array
+          items:
+            type: string
+    ErrorResourceResponse:
+      type: object
+      properties:
+        error:
+          $ref: "#/components/schemas/ErrorResource"
+  securitySchemes:
+    adfs:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: ""
+          scopes: {}
