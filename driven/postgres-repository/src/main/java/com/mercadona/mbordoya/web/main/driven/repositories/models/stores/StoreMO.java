@@ -1,6 +1,5 @@
 package com.mercadona.mbordoya.web.main.driven.repositories.models.stores;
 
-import com.mercadona.framework.cna.lib.jpa.auditing.AuditableEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Audited
-public class StoreMO extends AuditableEntity {
+public class StoreMO {
 
   @Id
   @Column(name = "id")
