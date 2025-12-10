@@ -15,4 +15,6 @@ public interface StoreUseCasePort {
   Store updateStore(Store storeUpdated);
 
   Long deleteStore(Long id);
+
+  Store getStore(Long id);
 }

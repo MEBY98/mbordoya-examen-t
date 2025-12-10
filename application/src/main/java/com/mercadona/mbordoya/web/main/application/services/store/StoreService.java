@@ -75,4 +75,12 @@ public class StoreService {
   public void deleteStore(final Long storeId) {
     this.storeDbPort.deleteById(storeId);
   }
+
+  public List<ModuleDomain> getModulesWithStockByStoreId(final Long id) {
+    return this.storeDbPort.getModulesWithStockByStoreId(id);
+  }
+
+  public List<StoreStorage> getStoreStoragesWithStockByStoreId(final Long id) {
+    return this.storeDbPort.getStoreStorageWithStockByStoreId(id);
+  }
 }

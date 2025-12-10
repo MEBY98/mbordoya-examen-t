@@ -1,6 +1,8 @@
 package com.mercadona.mbordoya.web.main.driving.controllers.api;
 
 import com.mercadona.mbordoya.web.main.driving.controllers.http_models.store.*;
+import com.mercadona.mbordoya.web.main.driving.controllers.http_models.store.summary.StoreSummaryResponse;
+import com.mercadona.mbordoya.web.main.driving.controllers.http_models.store.summary_alert.StoreAlertSummaryResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -33,4 +35,12 @@ public interface StoreApi {
   @Operation(summary = "Delete Store", security = @SecurityRequirement(name = "adfs"))
   @DeleteMapping("/{id}")
   ResponseEntity<Long> deleteStore(@PathVariable(name = "id") Long id);
+
+  @Operation(summary = "Summary Store", security = @SecurityRequirement(name = "adfs"))
+  @GetMapping("/{id}/summary")
+  ResponseEntity<StoreSummaryResponse> getSummary(@PathVariable Long id);
+
+  @Operation(summary = "Summary Alert Store", security = @SecurityRequirement(name = "adfs"))
+  @GetMapping("/{id}/summary-alerts")
+  ResponseEntity<StoreAlertSummaryResponse> getSummaryAlerts(@PathVariable Long id);
 }

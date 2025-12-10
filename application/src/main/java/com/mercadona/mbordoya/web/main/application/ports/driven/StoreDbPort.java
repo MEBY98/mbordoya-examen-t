@@ -38,4 +38,8 @@ public interface StoreDbPort {
   List<StoreStorage> getStoreStoragesByStoreId(Long storeId);
 
   void deleteById(Long storeId);
+
+  List<ModuleDomain> getModulesWithStockByStoreId(Long id);
+
+  List<StoreStorage> getStoreStorageWithStockByStoreId(Long id);
 }

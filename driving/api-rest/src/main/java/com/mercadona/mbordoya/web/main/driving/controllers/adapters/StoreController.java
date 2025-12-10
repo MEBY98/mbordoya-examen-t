@@ -6,6 +6,8 @@ import com.mercadona.mbordoya.web.main.domain.Store;
 import com.mercadona.mbordoya.web.main.domain.StoreQuery;
 import com.mercadona.mbordoya.web.main.driving.controllers.api.StoreApi;
 import com.mercadona.mbordoya.web.main.driving.controllers.http_models.store.*;
+import com.mercadona.mbordoya.web.main.driving.controllers.http_models.store.summary.StoreSummaryResponse;
+import com.mercadona.mbordoya.web.main.driving.controllers.http_models.store.summary_alert.StoreAlertSummaryResponse;
 import com.mercadona.mbordoya.web.main.driving.controllers.mappers.StoreControllerMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -57,5 +59,16 @@ public class StoreController implements StoreApi {
   @Override
   public ResponseEntity<Long> deleteStore(final Long id) {
     return ResponseEntity.ok(this.storeUseCasePort.deleteStore(id));
+  }
+
+  @Override
+  public ResponseEntity<StoreSummaryResponse> getSummary(final Long id) {
+    final var store = this.storeUseCasePort.getStore(id);
+    return ResponseEntity.ok(new StoreSummaryResponse(store));
+  }
+
+  @Override
+  public ResponseEntity<StoreAlertSummaryResponse> getSummaryAlerts(final Long id) {
+    return null;
   }
 }

@@ -50,4 +50,12 @@ public interface StoreDBMapper {
   @Mapping(target = "specialization.id", source = "specializationId")
   @Mapping(target = "moduleStocks", ignore = true)
   ModuleDomain toBasicModuleDomain(ModuleMO moduleMO);
+
+  @Mapping(target = "storeStorageStocks", source = "storeStorageStockMOS")
+  @Mapping(target = "store", ignore = true)
+  StoreStorage toStoreStorage(StoreStorageMO storeStorageMO);
+
+  @Mapping(target = "storeStorage", ignore = true)
+  @Mapping(target = "product", source = "productMO")
+  StoreStorageStock toStoreStorageStock(StoreStorageStockMO storeStorageStockMO);
 }

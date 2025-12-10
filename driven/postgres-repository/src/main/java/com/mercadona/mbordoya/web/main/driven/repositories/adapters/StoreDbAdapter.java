@@ -123,4 +123,16 @@ public class StoreDbAdapter implements StoreDbPort {
     this.storeJpaRepository.deleteById(storeId);
     this.storeJpaRepository.flush();
   }
+
+  @Override
+  @Transactional(readOnly = true)
+  public List<ModuleDomain> getModulesWithStockByStoreId(final Long storeId) {
+    return this.moduleJpaRepository.findAllByStoreId(storeId).stream().map(this.storeDBMapper::toModuleDomain).toList();
+  }
+
+  @Override
+  @Transactional(readOnly = true)
+  public List<StoreStorage> getStoreStorageWithStockByStoreId(final Long storeId) {
+    return this.storeStorageJpaRepository.findAllByStoreId(storeId).stream().map(this.storeDBMapper::toStoreStorage).toList();
+  }
 }

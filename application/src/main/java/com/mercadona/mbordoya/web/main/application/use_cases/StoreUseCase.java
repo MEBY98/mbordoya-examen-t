@@ -58,4 +58,15 @@ public class StoreUseCase implements StoreUseCasePort {
     }
     return storeId;
   }
+
+  @Override
+  public Store getStore(final Long id) {
+    final var store = this.storeService.getById(id);
+    final var modules = this.storeService.getModulesWithStockByStoreId(id);
+    this.storeFiller.fillModulesSpecialization(modules);
+    final var storeStorages = this.storeService.getStoreStoragesWithStockByStoreId(id);
+    store.setModules(modules);
+    store.setStoreStorages(storeStorages);
+    return store;
+  }
 }
