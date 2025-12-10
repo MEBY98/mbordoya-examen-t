@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
 
 import java.util.List;
 
@@ -12,6 +14,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Audited
 public class StoreStorageMO {
 
   @Id
@@ -35,5 +38,6 @@ public class StoreStorageMO {
   private StoreMO storeMO;
 
   @OneToMany(mappedBy = "storeStorageMO", fetch = FetchType.LAZY)
+  @NotAudited
   private List<StoreStorageStockMO> storeStorageStockMOS;
 }

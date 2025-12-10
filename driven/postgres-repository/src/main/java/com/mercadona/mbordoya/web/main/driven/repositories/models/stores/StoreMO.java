@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.envers.Audited;
-import org.hibernate.envers.NotAudited;
 
 import java.util.List;
 
@@ -30,11 +29,9 @@ public class StoreMO extends AuditableEntity {
   @Column(name = "address")
   private String address;
 
-  @NotAudited
   @OneToMany(mappedBy = "storeMO", fetch = FetchType.LAZY)
   private List<ModuleMO> moduleMOS;
 
-  @NotAudited
   @OneToMany(mappedBy = "storeMO", fetch = FetchType.LAZY)
   private List<StoreStorageMO> storeStorageMOS;
 }

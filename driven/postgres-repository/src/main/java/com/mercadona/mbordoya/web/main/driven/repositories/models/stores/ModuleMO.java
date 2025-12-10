@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
 
 import java.util.List;
 
@@ -12,6 +14,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Audited
 public class ModuleMO {
 
   @Id
@@ -37,8 +40,10 @@ public class ModuleMO {
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "specialization_id", referencedColumnName = "id", updatable = false, insertable = false, foreignKey =
   @ForeignKey(name = "module_specialization_fk"))
+  @NotAudited
   private SpecializationMO specializationMO;
 
   @OneToMany(mappedBy = "moduleMO", fetch = FetchType.LAZY)
+  @NotAudited
   private List<ModuleStockMO> moduleStockMOS;
 }
