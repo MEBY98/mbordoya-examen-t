@@ -56,6 +56,24 @@ WITH next_id AS (
 INSERT INTO "module" (id, capacity, specialization_id, store_id)
 SELECT module_id, 100, 2, store_id  FROM next_id;
 
+--module 3 store 1
+WITH next_id AS (
+  SELECT
+  	currval('store_id_seq') AS store_id,
+  	nextval('module_id_seq') as module_id
+)
+INSERT INTO "module" (id, capacity, specialization_id, store_id)
+SELECT module_id, 20, 1, store_id  FROM next_id;
+
+--module 4 store 1
+WITH next_id AS (
+  SELECT
+  	currval('store_id_seq') AS store_id,
+  	nextval('module_id_seq') as module_id
+)
+INSERT INTO "module" (id, capacity, specialization_id, store_id)
+SELECT module_id, 35, 3, store_id  FROM next_id;
+
 --store storage 1 store 1
 WITH next_id AS (
   SELECT
@@ -80,6 +98,8 @@ INSERT INTO module_stock (quantity, module_id, product_id)
 VALUES (30, 1, 2);
 INSERT INTO module_stock (quantity, module_id, product_id)
 VALUES (10, 2, 2);
+INSERT INTO module_stock (quantity, module_id, product_id)
+VALUES (0, 4, 4);
 
 INSERT INTO store_storage_stock (quantity, store_storage_id, product_id)
 VALUES (10, 1, 1);
@@ -87,6 +107,10 @@ INSERT INTO store_storage_stock (quantity, store_storage_id, product_id)
 VALUES (30, 1, 2);
 INSERT INTO store_storage_stock (quantity, store_storage_id, product_id)
 VALUES (10, 2, 2);
+INSERT INTO store_storage_stock (quantity, store_storage_id, product_id)
+VALUES (10, 2, 3);
+INSERT INTO store_storage_stock (quantity, store_storage_id, product_id)
+VALUES (50, 2, 4);
 
 --INSERT INTO PRODUCT (id, name, price) VALUES (1, 'Product A', 10.0);
 --INSERT INTO PRODUCT (id, name, price) VALUES (2, 'Product B', 20.0);

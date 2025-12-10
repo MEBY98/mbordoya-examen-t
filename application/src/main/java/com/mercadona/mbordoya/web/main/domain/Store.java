@@ -30,4 +30,21 @@ public class Store {
     this.name = storeUpdated.getName();
     this.address =  storeUpdated.getAddress();
   }
+
+  public List<ModuleDomain> getModulesWithProductsWithZeroStock() {
+    return modules.stream()
+        .filter(ModuleDomain::hasProductWithZeroStock)
+        .toList();
+  }
+
+  public boolean isProductExposed(final Product product) {
+    return modules.stream()
+        .flatMap(moduleDomain -> moduleDomain.getModuleStocks().stream())
+        .anyMatch(moduleStock ->
+            moduleStock.getProduct().getId().equals(product.getId()) && moduleStock.getQuantity() > 0);
+  }
+
+  public boolean isProductUnexposed(final Product product) {
+    return !this.isProductExposed(product);
+  }
 }

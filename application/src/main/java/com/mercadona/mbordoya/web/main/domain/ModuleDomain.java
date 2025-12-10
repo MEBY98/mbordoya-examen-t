@@ -19,4 +19,12 @@ public class ModuleDomain {
   public boolean hasSpecialization() {
     return specialization != null && specialization.getId() != null;
   }
+
+  public boolean hasProductWithZeroStock() {
+    return moduleStocks.stream().anyMatch(ModuleStock::isZeroStock);
+  }
+
+  public List<ModuleStock> getProductWithZeroStock() {
+    return moduleStocks.stream().filter(ModuleStock::isZeroStock).toList();
+  }
 }

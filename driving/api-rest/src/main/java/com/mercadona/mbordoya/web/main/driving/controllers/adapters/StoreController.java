@@ -69,6 +69,7 @@ public class StoreController implements StoreApi {
 
   @Override
   public ResponseEntity<StoreAlertSummaryResponse> getSummaryAlerts(final Long id) {
-    return null;
+    final var store = this.storeUseCasePort.getStore(id);
+    return ResponseEntity.ok(new StoreAlertSummaryResponse(store));
   }
 }
