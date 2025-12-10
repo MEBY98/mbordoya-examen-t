@@ -249,3 +249,18 @@ archivo CSV es guardado en el bucket de forma local, devolviendo en la respuesta
    1. StoreUseCaseTest.updateStore() ya que se aprecia el uso de ArgumentCaptor.
    2. StoreControllerTest ya que se aprecia el uso de MockMvc.
    3. StoreServiceTest ya que se aprecia el caso donde se captura la excepción
+4. He creado historificacion para las tablas StoreMO, ModuleMO, StoreStorageMO que serian las tablas claves del dominio
+de la apliacación para en caso de querer auditar también el resto de tablas, la configuración es básicamente agregar:
+```java
+@Audited
+public class StoreMO {}
+```
+en la clase de modelo que se quiere historificar, verificar que en la migración se crean las tablas:
+```sql
+create table revinfo (
+        rev integer not null,
+        revtstmp bigint,
+        primary key (rev)
+    )
+```
+y las tablas de auditoría de las clases anotadas, en este caso serían: store_aud, module_aud, store_storage_aud
