@@ -10,6 +10,28 @@ INSERT INTO EXAMPLE_TYPE_NAME_TABLE (type_id, locale_language_code, description)
 INSERT INTO EXAMPLE_TYPE_NAME_TABLE (type_id, locale_language_code, description) VALUES (3, 'es-ES', 'TIPO_3');
 INSERT INTO EXAMPLE_TYPE_NAME_TABLE (type_id, locale_language_code, description) VALUES (3, 'pt-PT', 'TIPO_3_PT');
 
+INSERT INTO product(id, name, selling_price) VALUES(1,'Arroz de Valencia', 6.5);
+INSERT INTO product(id, name, selling_price) VALUES(2,'Galletas sin gluten', 3.6);
+INSERT INTO product(id, name, selling_price) VALUES(3,'Leche de vaca', 1.5);
+INSERT INTO product(id, name, selling_price) VALUES(4,'Café soluble', 4.0);
+INSERT INTO product(id, name, selling_price) VALUES(5,'Aceite de oliva virgen extra', 8.0);
+INSERT INTO product(id, name, selling_price) VALUES(6,'Yogur natural', 1.5);
+INSERT INTO product(id, name, selling_price) VALUES(7, 'Pack Agua 6 ', 6.0);
+INSERT INTO product(id, name, selling_price) VALUES(8,'Zumo de naranja natural', 3.0);
+INSERT INTO product(id, name, selling_price) VALUES(9,'Helado chocolate y vainilla', 3.2);
+INSERT INTO product(id, name, selling_price) VALUES(10,'Mochis pistacho', 3.5);
+
+INSERT INTO specialization (id) VALUES (1);
+INSERT INTO specialization (id) VALUES (2);
+INSERT INTO specialization (id) VALUES (3);
+
+INSERT INTO specialization_name (id, locale_language_code, name) VALUES (1, 'es-ES', 'REFRIGERADO');
+INSERT INTO specialization_name (id, locale_language_code, name) VALUES (1, 'pt-PT', 'REFRIGERADO_PT');
+INSERT INTO specialization_name (id, locale_language_code, name) VALUES (2, 'es-ES', 'CONGELADO');
+INSERT INTO specialization_name (id, locale_language_code, name) VALUES (2, 'pt-PT', 'CONGELADO_PT');
+INSERT INTO specialization_name (id, locale_language_code, name) VALUES (3, 'es-ES', 'PALETIZADO');
+INSERT INTO specialization_name (id, locale_language_code, name) VALUES (3, 'pt-PT', 'PALETIZADO_PT');
+
 --INSERT INTO PRODUCT (id, name, price) VALUES (1, 'Product A', 10.0);
 --INSERT INTO PRODUCT (id, name, price) VALUES (2, 'Product B', 20.0);
 --INSERT INTO PRODUCT (id, name, price) VALUES (3, 'Product C', 30.0);

@@ -161,6 +161,13 @@ driven/postgres-repository/sql/migration
 ```
 ya que en un entorno real se deberia utilizar flyway para la gestion de migraciones.
 
+He eliminado en StoreSpecification la logica para usar la funcion "unaccent" de POSTGRES ya que en la BBDD de datos 
+que esta dockerizada en el proyecto el metodo no existe, mientras que en las BBDD de los entornos oficiales de Mercadona
+sí que existe.
+```java
+private static final String UNACCENT_POSTGRESQL_FUNCTION = "unaccent";
+```
+
 # AUTHORIZATION
 
 Se ha desarrollado una seguridad de peticiones básica para el ejemplo, utilizando un filtro que comprueba la existencia de un header

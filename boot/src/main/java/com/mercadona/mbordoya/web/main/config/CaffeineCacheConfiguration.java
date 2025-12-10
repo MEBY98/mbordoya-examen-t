@@ -34,6 +34,16 @@ public class CaffeineCacheConfiguration {
         Caffeine.from("expireAfterWrite=24h, maximumSize=1").build()
     );
 
+    caffeineCacheManager.registerCustomCache(
+        "specializationsMap",
+        Caffeine.from("expireAfterWrite=24h, maximumSize=1").build()
+    );
+
+    caffeineCacheManager.registerCustomCache(
+        "specializations",
+        Caffeine.from("expireAfterWrite=24h, maximumSize=1").build()
+    );
+
     return caffeineCacheManager;
   }
 }
